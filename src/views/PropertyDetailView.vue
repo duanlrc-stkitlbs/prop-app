@@ -93,28 +93,28 @@ function confirmDeleteProperty() {
 </script>
 
 <template>
-  <div v-if="property" class="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-    <!-- Back Button & Top Action Strip -->
+  <div v-if="property" class="space-y-8 max-w-7xl mx-auto px-6 lg:px-8 py-8">
+    <!-- Back Button & Actions -->
     <div class="flex items-center justify-between gap-4">
       <button
         @click="router.push('/')"
-        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-semibold transition-all active:scale-95"
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:bg-zinc-800 text-xs font-medium transition-colors"
       >
-        <ArrowLeft class="w-4 h-4" />
-        <span>Back to Dashboard</span>
+        <ArrowLeft class="w-3.5 h-3.5" />
+        <span>Portfolio</span>
       </button>
 
       <div class="flex items-center gap-2">
         <button
           @click="showPropertyModal = true"
-          class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+          class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
           title="Edit Property Info"
         >
           <Edit2 class="w-4 h-4" />
         </button>
         <button
           @click="confirmDeleteProperty"
-          class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+          class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
           title="Delete Property"
         >
           <Trash2 class="w-4 h-4" />
@@ -122,62 +122,64 @@ function confirmDeleteProperty() {
       </div>
     </div>
 
-    <!-- Main Property Banner Card -->
-    <div class="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl">
+    <!-- Main Property Info Card -->
+    <div class="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 sm:p-8">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <div class="space-y-2">
-          <!-- Type and Status Badge -->
+        <div class="space-y-3">
+          <!-- Type and Status -->
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+            <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700/60">
               {{ property.type }}
             </span>
-            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+            <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-800">
               {{ property.status }}
             </span>
-            <span v-if="property.rentalIncome" class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">
+            <span v-if="property.rentalIncome" class="text-xs font-mono font-medium px-2.5 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-800">
               Income: {{ store.formatCurrency(property.rentalIncome) }}/mo
             </span>
           </div>
 
           <!-- Name & Address -->
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            {{ property.name }}
-          </h1>
-          <p class="flex items-center gap-1.5 text-sm text-slate-400">
-            <MapPin class="w-4 h-4 text-slate-500 shrink-0" />
-            <span>{{ property.address }}</span>
-          </p>
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-semibold text-white tracking-tight">
+              {{ property.name }}
+            </h1>
+            <p class="flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400 mt-1">
+              <MapPin class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+              <span>{{ property.address }}</span>
+            </p>
+          </div>
 
           <!-- Units Badges -->
           <div v-if="property.units && property.units.length > 0" class="flex items-center gap-1.5 flex-wrap pt-1">
-            <span class="text-xs text-slate-400 font-semibold flex items-center gap-1">
+            <span class="text-xs text-zinc-500 font-medium flex items-center gap-1">
               <Layers class="w-3.5 h-3.5" /> Units:
             </span>
             <span
               v-for="(u, idx) in property.units"
               :key="idx"
-              class="text-xs px-2.5 py-0.5 rounded-lg bg-slate-950 text-slate-200 border border-slate-800"
+              class="text-xs px-2.5 py-0.5 rounded bg-zinc-950 text-zinc-300 border border-zinc-800"
             >
               {{ u }}
             </span>
           </div>
         </div>
 
-        <!-- Right Monthly Spend & Snag summary -->
+        <!-- Right Metric Strip -->
         <div class="flex items-center gap-3 shrink-0">
-          <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-[130px]">
-            <div class="text-[10px] text-slate-400 font-semibold uppercase">Monthly Spend</div>
-            <div class="text-lg font-bold text-white font-mono mt-0.5">
+          <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-center min-w-[130px]">
+            <div class="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Monthly Spend</div>
+            <div class="text-base font-semibold text-white font-mono mt-0.5">
               {{ store.formatCurrency(store.getPropertyMonthlySpend(property.id)) }}
             </div>
           </div>
 
           <div
-            class="p-4 rounded-2xl border text-center min-w-[130px]"
-            :class="propertyOpenSnags.length > 0 ? 'bg-rose-950/20 border-rose-500/30 text-rose-300' : 'bg-slate-950/80 border-slate-800 text-emerald-400'"
+            class="p-4 rounded-xl bg-zinc-950 border text-center min-w-[130px]"
+            :class="propertyOpenSnags.length > 0 ? 'border-zinc-600' : 'border-zinc-800'"
           >
-            <div class="text-[10px] uppercase font-semibold opacity-80">Open Snags</div>
-            <div class="text-lg font-bold font-mono mt-0.5">
+            <div class="text-[10px] uppercase font-medium text-zinc-500 tracking-wider">Open Tasks</div>
+            <div class="text-base font-semibold text-white font-mono mt-0.5">
               {{ propertyOpenSnags.length }}
             </div>
           </div>
@@ -185,75 +187,68 @@ function confirmDeleteProperty() {
       </div>
     </div>
 
-    <!-- Navigation Tabs for Property Hub -->
-    <div class="flex items-center gap-2 overflow-x-auto p-1.5 rounded-2xl bg-slate-900/90 border border-slate-800">
+    <!-- Navigation Tabs -->
+    <div class="flex items-center gap-1.5 overflow-x-auto p-1.5 rounded-xl bg-zinc-900 border border-zinc-800">
       <button
         @click="activeTab = 'overview'"
-        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap"
-        :class="activeTab === 'overview' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
+        :class="activeTab === 'overview' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'"
       >
-        <KeyRound class="w-4 h-4" />
+        <KeyRound class="w-3.5 h-3.5" />
         <span>Key Vault ({{ propertyVault.length }})</span>
       </button>
 
       <button
         @click="activeTab = 'expenses'"
-        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap"
-        :class="activeTab === 'expenses' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
+        :class="activeTab === 'expenses' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'"
       >
-        <Receipt class="w-4 h-4" />
+        <Receipt class="w-3.5 h-3.5" />
         <span>Expenses & Spend ({{ propertyExpenses.length }})</span>
       </button>
 
       <button
         @click="activeTab = 'snags'"
-        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap"
-        :class="activeTab === 'snags' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
+        :class="activeTab === 'snags' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'"
       >
-        <Wrench class="w-4 h-4" />
-        <span>Snag List ({{ propertySnags.length }})</span>
-        <span
-          v-if="propertyOpenSnags.length > 0"
-          class="px-1.5 py-0.2 rounded-full text-[10px] font-bold"
-          :class="activeTab === 'snags' ? 'bg-white/20 text-white' : 'bg-rose-500/20 text-rose-300'"
-        >
-          {{ propertyOpenSnags.length }}
-        </span>
+        <Wrench class="w-3.5 h-3.5" />
+        <span>Snags ({{ propertySnags.length }})</span>
       </button>
 
       <button
         @click="activeTab = 'contacts'"
-        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap"
-        :class="activeTab === 'contacts' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
+        :class="activeTab === 'contacts' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'"
       >
-        <Users class="w-4 h-4" />
+        <Users class="w-3.5 h-3.5" />
         <span>Contacts ({{ propertyContacts.length }})</span>
       </button>
 
       <button
         @click="activeTab = 'notes'"
-        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap"
-        :class="activeTab === 'notes' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
+        :class="activeTab === 'notes' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'"
       >
-        <FileText class="w-4 h-4" />
+        <FileText class="w-3.5 h-3.5" />
         <span>Notes & Log ({{ propertyNotes.length }})</span>
       </button>
     </div>
 
-    <!-- TAB 1: Key Vault & Meter Reference -->
+    <!-- TAB 1: Key Vault -->
     <div v-if="activeTab === 'overview'" class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">Property Key Vault & Utility Codes</h2>
-          <p class="text-xs text-slate-400">Prepaid meters, gate PINs, Wi-Fi keys, account numbers with 1-tap copy</p>
+          <h2 class="text-base font-semibold text-zinc-100">Utility Codes & Key Details</h2>
+          <p class="text-xs text-zinc-400">Prepaid meters, gate PINs, and access references</p>
         </div>
 
         <button
           @click="activeVault = null; showVaultModal = true"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-600/15 hover:bg-amber-600/25 border border-amber-500/30 text-amber-300 text-xs font-semibold transition-all active:scale-95"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-medium transition-all active:scale-98"
         >
-          <Plus class="w-4 h-4" />
-          <span>Add Key Detail</span>
+          <Plus class="w-3.5 h-3.5" />
+          <span>Add Code</span>
         </button>
       </div>
 
@@ -266,17 +261,9 @@ function confirmDeleteProperty() {
         />
       </div>
 
-      <div v-else class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 text-center">
-        <KeyRound class="w-8 h-8 text-slate-500 mx-auto mb-2" />
-        <h4 class="text-sm font-bold text-slate-200">No Key Details Saved Yet</h4>
-        <p class="text-xs text-slate-400 mt-1">Store prepaid electricity meter numbers, gate codes, or Wi-Fi passwords.</p>
-        <button
-          @click="showVaultModal = true"
-          class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 text-white text-xs font-bold"
-        >
-          <Plus class="w-4 h-4" />
-          <span>Add First Code</span>
-        </button>
+      <div v-else class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 text-center">
+        <h4 class="text-sm font-semibold text-zinc-300">No Key Details Saved</h4>
+        <p class="text-xs text-zinc-500 mt-1">Store prepaid meter numbers or alarm PINs.</p>
       </div>
     </div>
 
@@ -286,65 +273,64 @@ function confirmDeleteProperty() {
 
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">Monthly Committed Expenses & Bills</h2>
-          <p class="text-xs text-slate-400">1-tap toggle to mark paid each cycle</p>
+          <h2 class="text-base font-semibold text-zinc-100">Monthly Committed Bills</h2>
+          <p class="text-xs text-zinc-400">Toggle to reconcile bills for the current period</p>
         </div>
 
         <button
           @click="activeExpense = null; showExpenseModal = true"
-          class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md active:scale-95 transition-all"
+          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-sm active:scale-98 transition-all"
         >
-          <Plus class="w-4 h-4" />
+          <Plus class="w-3.5 h-3.5" />
           <span>Add Expense</span>
         </button>
       </div>
 
-      <div class="space-y-3">
+      <div class="space-y-2.5">
         <div
           v-for="exp in propertyExpenses"
           :key="exp.id"
-          class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all"
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all"
         >
           <div class="flex items-start gap-3">
-            <!-- 1-Tap Mark Paid Button -->
+            <!-- Toggle Checkbox -->
             <button
               @click="store.toggleExpensePaid(exp.id)"
-              class="mt-1 shrink-0 p-1 rounded-lg transition-transform active:scale-90"
-              :class="exp.isPaid ? 'text-emerald-400' : 'text-slate-500 hover:text-slate-300'"
+              class="mt-1 shrink-0 text-zinc-400 hover:text-white transition-colors"
               :title="exp.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'"
             >
-              <CheckCircle2 v-if="exp.isPaid" class="w-5 h-5 fill-emerald-500/20" />
-              <Circle v-else class="w-5 h-5" />
+              <CheckCircle2 v-if="exp.isPaid" class="w-5 h-5 text-zinc-300" />
+              <Circle v-else class="w-5 h-5 text-zinc-600 hover:text-zinc-400" />
             </button>
 
             <div>
               <div class="flex items-center gap-2 flex-wrap">
-                <h4 class="text-sm font-bold text-slate-100" :class="{ 'line-through text-slate-400': exp.isPaid }">
+                <h4 class="text-sm font-semibold text-zinc-100" :class="{ 'line-through text-zinc-500': exp.isPaid }">
                   {{ exp.name }}
                 </h4>
-                <span class="text-[11px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+                <span class="text-[11px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700/60">
                   {{ exp.category }}
                 </span>
-                <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-950 text-slate-400">
-                  Due: {{ exp.dueDay }}{{ exp.dueDay === 1 ? 'st' : exp.dueDay === 2 ? 'nd' : exp.dueDay === 3 ? 'rd' : 'th' }} of month
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-zinc-950 text-zinc-400">
+                  Due: {{ exp.dueDay }}th
                 </span>
               </div>
 
-              <div class="text-xs text-slate-400 mt-1 flex items-center gap-3 flex-wrap">
-                <span v-if="exp.accountReference" class="font-mono text-slate-300">Ref: {{ exp.accountReference }}</span>
-                <span v-if="exp.lastPaidDate" class="text-[11px] text-emerald-400">Last Paid: {{ exp.lastPaidDate }}</span>
+              <div class="text-xs text-zinc-400 mt-1 flex items-center gap-3 flex-wrap">
+                <span v-if="exp.accountReference" class="font-mono text-zinc-300">Ref: {{ exp.accountReference }}</span>
+                <span v-if="exp.lastPaidDate" class="text-[11px] text-zinc-400">Settled: {{ exp.lastPaidDate }}</span>
               </div>
-              <p v-if="exp.notes" class="text-xs text-slate-400 mt-1">{{ exp.notes }}</p>
+              <p v-if="exp.notes" class="text-xs text-zinc-400 mt-1">{{ exp.notes }}</p>
             </div>
           </div>
 
           <!-- Amount & Actions -->
-          <div class="flex items-center justify-between sm:justify-end gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-slate-800">
+          <div class="flex items-center justify-between sm:justify-end gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-zinc-800">
             <div class="text-right">
-              <div class="text-base font-extrabold text-white font-mono">
+              <div class="text-base font-semibold text-white font-mono">
                 {{ store.formatCurrency(exp.amount) }}
               </div>
-              <div class="text-[10px] text-slate-400 uppercase font-semibold">
+              <div class="text-[10px] text-zinc-500 uppercase font-medium">
                 {{ exp.frequency }}
               </div>
             </div>
@@ -352,15 +338,15 @@ function confirmDeleteProperty() {
             <div class="flex items-center gap-1">
               <button
                 @click="activeExpense = exp; showExpenseModal = true"
-                class="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
-                title="Edit Expense"
+                class="p-1 rounded text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                title="Edit"
               >
                 <Edit2 class="w-3.5 h-3.5" />
               </button>
               <button
                 @click="store.deleteExpense(exp.id)"
-                class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-                title="Delete Expense"
+                class="p-1 rounded text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                title="Delete"
               >
                 <Trash2 class="w-3.5 h-3.5" />
               </button>
@@ -370,19 +356,19 @@ function confirmDeleteProperty() {
       </div>
     </div>
 
-    <!-- TAB 3: Snags & Tasks -->
+    <!-- TAB 3: Snags -->
     <div v-if="activeTab === 'snags'" class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">Property Snag List & Tasks</h2>
-          <p class="text-xs text-slate-400">Track defects, repair quotes, and maintenance</p>
+          <h2 class="text-base font-semibold text-zinc-100">Snags & Repairs</h2>
+          <p class="text-xs text-zinc-400">Defects and ongoing maintenance</p>
         </div>
 
         <button
           @click="activeSnag = null; showSnagModal = true"
-          class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold shadow-md active:scale-95 transition-all"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-medium transition-all active:scale-98"
         >
-          <Plus class="w-4 h-4" />
+          <Plus class="w-3.5 h-3.5" />
           <span>Log Snag</span>
         </button>
       </div>
@@ -398,17 +384,9 @@ function confirmDeleteProperty() {
         />
       </div>
 
-      <div v-else class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 text-center">
-        <CheckCircle2 class="w-8 h-8 text-emerald-400 mx-auto mb-2" />
-        <h4 class="text-sm font-bold text-slate-200">Zero Open Snags!</h4>
-        <p class="text-xs text-slate-400 mt-1">This property is in perfect condition.</p>
-        <button
-          @click="showSnagModal = true"
-          class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold"
-        >
-          <Plus class="w-4 h-4" />
-          <span>Log Snag</span>
-        </button>
+      <div v-else class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 text-center">
+        <h4 class="text-sm font-semibold text-zinc-300">Zero Open Snags</h4>
+        <p class="text-xs text-zinc-500 mt-1">This property has no open maintenance items.</p>
       </div>
     </div>
 
@@ -416,15 +394,15 @@ function confirmDeleteProperty() {
     <div v-if="activeTab === 'contacts'" class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">Assigned Service Contacts & Tenants</h2>
-          <p class="text-xs text-slate-400">1-tap call & WhatsApp directly from cards</p>
+          <h2 class="text-base font-semibold text-zinc-100">Assigned Trades & Tenants</h2>
+          <p class="text-xs text-zinc-400">Relevant service directory for this address</p>
         </div>
 
         <button
           @click="activeContact = null; showContactModal = true"
-          class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md active:scale-95 transition-all"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-medium transition-all active:scale-98"
         >
-          <Plus class="w-4 h-4" />
+          <Plus class="w-3.5 h-3.5" />
           <span>Add Contact</span>
         </button>
       </div>
@@ -439,33 +417,25 @@ function confirmDeleteProperty() {
         />
       </div>
 
-      <div v-else class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 text-center">
-        <Users class="w-8 h-8 text-slate-500 mx-auto mb-2" />
-        <h4 class="text-sm font-bold text-slate-200">No Assigned Contacts Yet</h4>
-        <p class="text-xs text-slate-400 mt-1">Assign plumbers, electricians, tenants, or managing agents.</p>
-        <button
-          @click="showContactModal = true"
-          class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold"
-        >
-          <Plus class="w-4 h-4" />
-          <span>Add Contact</span>
-        </button>
+      <div v-else class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 text-center">
+        <h4 class="text-sm font-semibold text-zinc-300">No Contacts Assigned</h4>
+        <p class="text-xs text-zinc-500 mt-1">Add plumbers, electricians, or tenants.</p>
       </div>
     </div>
 
-    <!-- TAB 5: Notes & Timeline History -->
+    <!-- TAB 5: Notes -->
     <div v-if="activeTab === 'notes'" class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">Inspection Notes & Activity Log</h2>
-          <p class="text-xs text-slate-400">Timestamped records, access logs & lease updates</p>
+          <h2 class="text-base font-semibold text-zinc-100">Inspection Notes & Log</h2>
+          <p class="text-xs text-zinc-400">Timestamped records and historical entries</p>
         </div>
 
         <button
           @click="activeNote = null; showNoteModal = true"
-          class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 active:scale-95 transition-all"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-medium transition-all active:scale-98"
         >
-          <Plus class="w-4 h-4" />
+          <Plus class="w-3.5 h-3.5" />
           <span>New Note</span>
         </button>
       </div>
@@ -474,14 +444,14 @@ function confirmDeleteProperty() {
         <div
           v-for="note in propertyNotes"
           :key="note.id"
-          class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-2 shadow-md"
+          class="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2"
         >
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800/60">
+              <span class="text-xs font-medium px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700/60">
                 {{ note.category }}
               </span>
-              <span class="text-xs text-slate-400">
+              <span class="text-xs text-zinc-500">
                 {{ new Date(note.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) }}
               </span>
             </div>
@@ -489,37 +459,29 @@ function confirmDeleteProperty() {
             <div class="flex items-center gap-1">
               <button
                 @click="activeNote = note; showNoteModal = true"
-                class="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
-                title="Edit Note"
+                class="p-1 rounded text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                title="Edit"
               >
                 <Edit2 class="w-3.5 h-3.5" />
               </button>
               <button
                 @click="store.deleteNote(note.id)"
-                class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-                title="Delete Note"
+                class="p-1 rounded text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                title="Delete"
               >
                 <Trash2 class="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
-          <h4 class="text-base font-bold text-white">{{ note.title }}</h4>
-          <p class="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{{ note.content }}</p>
+          <h4 class="text-sm font-semibold text-zinc-100">{{ note.title }}</h4>
+          <p class="text-xs text-zinc-300 leading-relaxed whitespace-pre-line">{{ note.content }}</p>
         </div>
       </div>
 
-      <div v-else class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 text-center">
-        <FileText class="w-8 h-8 text-slate-500 mx-auto mb-2" />
-        <h4 class="text-sm font-bold text-slate-200">No Notes Logged</h4>
-        <p class="text-xs text-slate-400 mt-1">Record inspection logs, meter disputes, or key handover notes.</p>
-        <button
-          @click="showNoteModal = true"
-          class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold"
-        >
-          <Plus class="w-4 h-4" />
-          <span>Add Note</span>
-        </button>
+      <div v-else class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 text-center">
+        <h4 class="text-sm font-semibold text-zinc-300">No Notes Logged</h4>
+        <p class="text-xs text-zinc-500 mt-1">Record inspection logs, meter disputes, or key handover notes.</p>
       </div>
     </div>
 
@@ -539,12 +501,12 @@ function confirmDeleteProperty() {
     />
   </div>
 
-  <div v-else class="max-w-7xl mx-auto px-4 py-12 text-center">
-    <h2 class="text-lg font-bold text-white">Property Not Found</h2>
-    <p class="text-sm text-slate-400 mt-1">The requested property may have been removed.</p>
+  <div v-else class="max-w-7xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-base font-semibold text-zinc-100">Property Not Found</h2>
+    <p class="text-xs text-zinc-400 mt-1">The requested property may have been removed.</p>
     <button
       @click="router.push('/')"
-      class="mt-4 px-4 py-2 rounded-xl bg-indigo-600 text-white font-semibold text-xs"
+      class="mt-4 px-4 py-2 rounded-lg bg-zinc-100 text-zinc-950 font-semibold text-xs"
     >
       Return to Dashboard
     </button>

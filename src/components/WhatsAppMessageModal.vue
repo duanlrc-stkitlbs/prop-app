@@ -2,7 +2,7 @@
 import { ref, computed, watch } from 'vue'
 import type { Contact, Snag, Property } from '../types/property'
 import { usePropertyStore } from '../stores/propertyStore'
-import { MessageCircle, X, Send, Copy, Check, Wrench } from 'lucide-vue-next'
+import { X, Send, Copy, Check, Wrench } from 'lucide-vue-next'
 
 const props = defineProps<{
   show: boolean
@@ -87,7 +87,6 @@ async function copyText() {
     store.showToast('Message copied to clipboard', 'success')
     setTimeout(() => { copied.value = false }, 2000)
   } catch {
-    // fallback
     const ta = document.createElement('textarea')
     ta.value = customMessage.value
     document.body.appendChild(ta)
@@ -104,81 +103,76 @@ async function copyText() {
 <template>
   <Teleport to="body">
     <Transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0 scale-95"
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0 scale-98"
       enter-to-class="opacity-100 scale-100"
-      leave-active-class="transition duration-150 ease-in"
+      leave-active-class="transition duration-100 ease-in"
       leave-from-class="opacity-100 scale-100"
-      leave-to-class="opacity-0 scale-95"
+      leave-to-class="opacity-0 scale-98"
     >
       <div
         v-if="show && contact"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl p-6 space-y-4">
+        <div class="w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6 space-y-4">
           <!-- Header -->
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="p-2.5 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                <MessageCircle class="w-5 h-5" />
-              </div>
-              <div>
-                <h3 class="text-base font-bold text-white">WhatsApp Quick Message</h3>
-                <p class="text-xs text-slate-400">To: <strong class="text-slate-200">{{ contact.name }}</strong> ({{ contact.phone }})</p>
-              </div>
+            <div>
+              <h3 class="text-base font-semibold text-zinc-100">WhatsApp Message</h3>
+              <p class="text-xs text-zinc-400">Recipient: <strong class="text-zinc-200">{{ contact.name }}</strong> ({{ contact.phone }})</p>
             </div>
             <button
               @click="emit('close')"
-              class="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              class="p-1 rounded text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
             >
               <X class="w-5 h-5" />
             </button>
           </div>
 
-          <!-- Quick Templates (if no specific snag is bound) -->
+          <!-- Quick Templates -->
           <div v-if="!snag" class="flex gap-2 overflow-x-auto pb-1">
             <button
               @click="selectedTemplate = 'snag'"
-              class="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border"
-              :class="selectedTemplate === 'snag' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-slate-800 text-slate-400 border-slate-700'"
+              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border"
+              :class="selectedTemplate === 'snag' ? 'bg-zinc-100 text-zinc-950 border-zinc-100 font-semibold' : 'bg-zinc-950 text-zinc-400 border-zinc-800'"
             >
               Service Booking
             </button>
             <button
               @click="selectedTemplate = 'quote'"
-              class="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border"
-              :class="selectedTemplate === 'quote' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-slate-800 text-slate-400 border-slate-700'"
+              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border"
+              :class="selectedTemplate === 'quote' ? 'bg-zinc-100 text-zinc-950 border-zinc-100 font-semibold' : 'bg-zinc-950 text-zinc-400 border-zinc-800'"
             >
               Quote Request
             </button>
             <button
               @click="selectedTemplate = 'rent'"
-              class="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border"
-              :class="selectedTemplate === 'rent' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-slate-800 text-slate-400 border-slate-700'"
+              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border"
+              :class="selectedTemplate === 'rent' ? 'bg-zinc-100 text-zinc-950 border-zinc-100 font-semibold' : 'bg-zinc-950 text-zinc-400 border-zinc-800'"
             >
               Rent / Levy Check
             </button>
           </div>
 
           <!-- Snag info box if attached -->
-          <div v-if="snag" class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-1">
-            <div class="flex items-center gap-1.5 text-indigo-400 font-semibold">
-              <Wrench class="w-3.5 h-3.5" />
-              <span>Attached Snag: {{ snag.title }}</span>
+          <div v-if="snag" class="p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-xs space-y-1">
+            <div class="flex items-center gap-1.5 text-zinc-300 font-medium">
+              <Wrench class="w-3.5 h-3.5 text-zinc-400" />
+              <span>Attached Task: {{ snag.title }}</span>
             </div>
-            <div class="text-slate-400">Area: {{ snag.area }} • Severity: {{ snag.severity }}</div>
+            <div class="text-zinc-500">Area: {{ snag.area }} • Severity: {{ snag.severity }}</div>
           </div>
 
           <!-- Message Textarea -->
           <div class="space-y-1.5">
-            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">
               Message Content
             </label>
             <textarea
               v-model="customMessage"
               rows="6"
-              class="w-full px-4 py-3 rounded-2xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none font-sans"
+              class="w-full px-3.5 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 resize-none font-sans"
               placeholder="Type message..."
             ></textarea>
           </div>
@@ -187,16 +181,16 @@ async function copyText() {
           <div class="grid grid-cols-2 gap-3 pt-2">
             <button
               @click="copyText"
-              class="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition-all active:scale-98"
+              class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-medium text-xs border border-zinc-700 transition-all active:scale-98"
             >
-              <Check v-if="copied" class="w-4 h-4 text-emerald-400" />
-              <Copy v-else class="w-4 h-4" />
+              <Check v-if="copied" class="w-4 h-4 text-zinc-100" />
+              <Copy v-else class="w-4 h-4 text-zinc-400" />
               <span>{{ copied ? 'Copied' : 'Copy Text' }}</span>
             </button>
 
             <button
               @click="sendWhatsApp"
-              class="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all active:scale-98"
+              class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-xs transition-all active:scale-98"
             >
               <Send class="w-4 h-4" />
               <span>Open WhatsApp</span>

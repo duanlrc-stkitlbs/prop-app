@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import type { Expense, ExpenseCategory, ExpenseFrequency } from '../../types/property'
 import { usePropertyStore } from '../../stores/propertyStore'
-import { X, Receipt } from 'lucide-vue-next'
+import { X } from 'lucide-vue-next'
 
 const props = defineProps<{
   show: boolean
@@ -105,35 +105,30 @@ function submit() {
 <template>
   <Teleport to="body">
     <Transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0 translate-y-4 sm:scale-95"
-      enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100 translate-y-0 sm:scale-100"
-      leave-to-class="opacity-0 translate-y-4 sm:scale-95"
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0 scale-98"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-98"
     >
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md overflow-y-auto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="p-2.5 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                <Receipt class="w-5 h-5" />
-              </div>
-              <div>
-                <h3 class="text-base font-bold text-white">
-                  {{ expense ? 'Edit Expense' : 'Add New Expense' }}
-                </h3>
-                <p class="text-xs text-slate-400">Track recurring maintenance, rates, taxes & bills</p>
-              </div>
+            <div>
+              <h3 class="text-base font-semibold text-zinc-100">
+                {{ expense ? 'Edit Expense' : 'Add New Expense' }}
+              </h3>
+              <p class="text-xs text-zinc-400">Track recurring maintenance, rates, taxes & bills</p>
             </div>
             <button
               @click="emit('close')"
-              class="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              class="p-1 rounded text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
             >
               <X class="w-5 h-5" />
             </button>
@@ -142,10 +137,10 @@ function submit() {
           <form @submit.prevent="submit" class="space-y-4">
             <!-- Property Selector -->
             <div class="space-y-1">
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Property</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Property</label>
               <select
                 v-model="form.propertyId"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
               >
                 <option v-for="p in store.properties" :key="p.id" :value="p.id">
                   {{ p.name }} ({{ p.address }})
@@ -155,33 +150,33 @@ function submit() {
 
             <!-- Expense Name -->
             <div class="space-y-1">
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Expense / Bill Title</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Expense Title</label>
               <input
                 v-model="form.name"
                 type="text"
                 required
                 placeholder="e.g. City Municipal Rates, Body Corporate Levy"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
 
             <!-- Category & Frequency -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="space-y-1">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Category</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Category</label>
                 <select
                   v-model="form.category"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
                 >
                   <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
                 </select>
               </div>
 
               <div class="space-y-1">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Frequency</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Frequency</label>
                 <select
                   v-model="form.frequency"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
                 >
                   <option v-for="freq in frequencies" :key="freq" :value="freq">{{ freq }}</option>
                 </select>
@@ -191,7 +186,7 @@ function submit() {
             <!-- Amount & Due Day -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="space-y-1">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">
                   Amount ({{ store.settings.currencySymbol }})
                 </label>
                 <input
@@ -201,62 +196,62 @@ function submit() {
                   min="0"
                   required
                   placeholder="0.00"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 font-mono text-sm focus:outline-none focus:border-zinc-500"
                 />
               </div>
 
               <div class="space-y-1">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Due Day of Month</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Due Day</label>
                 <input
                   v-model.number="form.dueDay"
                   type="number"
                   min="1"
                   max="31"
                   placeholder="1 - 31"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 font-mono text-sm focus:outline-none focus:border-zinc-500"
                 />
               </div>
             </div>
 
             <!-- Paid Status Toggle -->
-            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-950 border border-slate-800">
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-zinc-950 border border-zinc-800">
               <div>
-                <div class="text-xs font-bold text-slate-200">Paid for current cycle?</div>
-                <div class="text-[11px] text-slate-400">Toggle whether this bill has been settled</div>
+                <div class="text-xs font-medium text-zinc-200">Paid for current cycle?</div>
+                <div class="text-[11px] text-zinc-500">Toggle if settled this cycle</div>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input v-model="form.isPaid" type="checkbox" class="sr-only peer" />
-                <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                <div class="w-10 h-5 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-200"></div>
               </label>
             </div>
 
             <!-- Account Reference -->
             <div class="space-y-1">
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Account / Reference #</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Account / Reference #</label>
               <input
                 v-model="form.accountReference"
                 type="text"
                 placeholder="e.g. CCT-992014881, Levy Acc #402"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-mono"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 font-mono"
               />
             </div>
 
             <!-- Notes -->
             <div class="space-y-1">
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Notes / Instructions</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Notes</label>
               <textarea
                 v-model="form.notes"
                 rows="2"
-                placeholder="e.g. Direct debit on 1st, invoice sent via email..."
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none"
+                placeholder="e.g. Direct debit on 1st..."
+                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 resize-none"
               ></textarea>
             </div>
 
             <!-- Submit Button -->
-            <div class="pt-3">
+            <div class="pt-2">
               <button
                 type="submit"
-                class="w-full py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all active:scale-98"
+                class="w-full py-3 px-4 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-sm transition-all active:scale-98"
               >
                 {{ expense ? 'Update Expense' : 'Save Expense' }}
               </button>

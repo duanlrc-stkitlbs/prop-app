@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import type { PropertyNote, NoteCategory } from '../../types/property'
 import { usePropertyStore } from '../../stores/propertyStore'
-import { X, FileText } from 'lucide-vue-next'
+import { X } from 'lucide-vue-next'
 
 const props = defineProps<{
   show: boolean
@@ -75,35 +75,30 @@ function submit() {
 <template>
   <Teleport to="body">
     <Transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0 translate-y-4 sm:scale-95"
-      enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100 translate-y-0 sm:scale-100"
-      leave-to-class="opacity-0 translate-y-4 sm:scale-95"
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0 scale-98"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-98"
     >
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md overflow-y-auto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="p-2.5 rounded-2xl bg-slate-800 text-slate-300 border border-slate-700">
-                <FileText class="w-5 h-5" />
-              </div>
-              <div>
-                <h3 class="text-base font-bold text-white">
-                  {{ note ? 'Edit Note' : 'Add Property Note' }}
-                </h3>
-                <p class="text-xs text-slate-400">Inspections, tenant notes, key logs, history</p>
-              </div>
+            <div>
+              <h3 class="text-base font-semibold text-zinc-100">
+                {{ note ? 'Edit Note' : 'Add Property Note' }}
+              </h3>
+              <p class="text-xs text-zinc-400">Inspections, tenant notes, key logs, history</p>
             </div>
             <button
               @click="emit('close')"
-              class="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              class="p-1 rounded text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
             >
               <X class="w-5 h-5" />
             </button>
@@ -113,10 +108,10 @@ function submit() {
             <!-- Property & Category -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="space-y-1">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Property</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Property</label>
                 <select
                   v-model="form.propertyId"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
                 >
                   <option v-for="p in store.properties" :key="p.id" :value="p.id">
                     {{ p.name }} ({{ p.address }})
@@ -125,10 +120,10 @@ function submit() {
               </div>
 
               <div class="space-y-1">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Category</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Category</label>
                 <select
                   v-model="form.category"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
                 >
                   <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
                 </select>
@@ -137,33 +132,33 @@ function submit() {
 
             <!-- Title -->
             <div class="space-y-1">
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Note Title</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Note Title</label>
               <input
                 v-model="form.title"
                 type="text"
                 required
                 placeholder="e.g. Annual Body Corporate Valuation, Lease Update"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
 
             <!-- Content -->
             <div class="space-y-1">
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Note Content & Details</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Note Content</label>
               <textarea
                 v-model="form.content"
                 rows="5"
                 required
-                placeholder="Type log details, agreements, serial numbers, observations..."
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 resize-none"
+                placeholder="Type log details, agreements, observations..."
+                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 resize-none"
               ></textarea>
             </div>
 
             <!-- Submit Button -->
-            <div class="pt-3">
+            <div class="pt-2">
               <button
                 type="submit"
-                class="w-full py-3 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg shadow-indigo-600/30 transition-all active:scale-98"
+                class="w-full py-3 px-4 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-sm transition-all active:scale-98"
               >
                 {{ note ? 'Update Note' : 'Save Note' }}
               </button>

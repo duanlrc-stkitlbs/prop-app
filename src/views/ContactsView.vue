@@ -6,10 +6,8 @@ import ContactCard from '../components/ContactCard.vue'
 import ContactModal from '../components/modals/ContactModal.vue'
 import WhatsAppMessageModal from '../components/WhatsAppMessageModal.vue'
 import {
-  Users,
   Search,
-  Plus,
-  ShieldAlert
+  Plus
 } from 'lucide-vue-next'
 
 const store = usePropertyStore()
@@ -75,7 +73,6 @@ const filteredContacts = computed(() => {
     )
   }
 
-  // Sort emergency contacts to the top
   return list.slice().sort((a, b) => {
     if (a.isEmergencyContact && !b.isEmergencyContact) return -1
     if (!a.isEmergencyContact && b.isEmergencyContact) return 1
@@ -85,28 +82,23 @@ const filteredContacts = computed(() => {
 </script>
 
 <template>
-  <div class="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <div class="space-y-8 max-w-7xl mx-auto px-6 lg:px-8 py-8">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="p-3 rounded-2xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
-          <Users class="w-6 h-6" />
-        </div>
-        <div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Service Directory & Contacts
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Plumbers, electricians, handymen, tenants & emergency dispatch
-          </p>
-        </div>
+      <div class="space-y-1">
+        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+          Service Directory & Contacts
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400">
+          Contractors, plumbers, electricians, handymen & emergency numbers
+        </p>
       </div>
 
       <button
         @click="openNewContactModal"
-        class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-blue-600/30 transition-all active:scale-95 shrink-0"
+        class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-sm transition-all active:scale-98 shrink-0 self-start sm:self-center"
       >
-        <Plus class="w-4 h-4" />
+        <Plus class="w-3.5 h-3.5" />
         <span>Add Contact</span>
       </button>
     </div>
@@ -115,29 +107,28 @@ const filteredContacts = computed(() => {
     <div class="space-y-3">
       <!-- Search Input -->
       <div class="relative">
-        <Search class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <Search class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Search by name, company, trade, or phone number..."
-          class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-900 border border-slate-800 text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 shadow-inner"
+          placeholder="Search contacts by name, company, trade, or phone..."
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder-zinc-500 text-xs sm:text-sm focus:outline-none focus:border-zinc-500"
         />
       </div>
 
       <!-- Role Filter Chips -->
-      <div class="flex gap-2 overflow-x-auto pb-1">
+      <div class="flex gap-1.5 overflow-x-auto pb-1">
         <button
           v-for="role in roles"
           :key="role"
           @click="selectedRole = role"
-          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border"
+          class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border"
           :class="[
             selectedRole === role
-              ? 'bg-blue-600 text-white border-blue-500 shadow-md'
-              : 'bg-slate-900 text-slate-400 border-slate-800 hover:bg-slate-800 hover:text-slate-200'
+              ? 'bg-zinc-800 text-white border-zinc-700 shadow-sm'
+              : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:bg-zinc-800/60 hover:text-zinc-200'
           ]"
         >
-          <ShieldAlert v-if="role === 'Emergency'" class="w-3.5 h-3.5 text-rose-400" />
           <span>{{ role }}</span>
         </button>
       </div>
@@ -156,14 +147,13 @@ const filteredContacts = computed(() => {
 
     <div
       v-else
-      class="p-12 rounded-3xl bg-slate-900/50 border border-slate-800 text-center max-w-md mx-auto"
+      class="p-12 rounded-2xl bg-zinc-900/60 border border-zinc-800 text-center max-w-md mx-auto"
     >
-      <Users class="w-10 h-10 text-slate-500 mx-auto mb-3" />
-      <h3 class="text-base font-bold text-slate-200">No Contacts Found</h3>
-      <p class="text-xs text-slate-400 mt-1">Try adjusting your search query or role filter.</p>
+      <h3 class="text-sm font-semibold text-zinc-200">No Contacts Found</h3>
+      <p class="text-xs text-zinc-400 mt-1">Try adjusting your search query or filter.</p>
       <button
         @click="searchQuery = ''; selectedRole = 'All'"
-        class="mt-4 px-4 py-2 rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700"
+        class="mt-4 px-3.5 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-medium hover:bg-zinc-700"
       >
         Clear Filters
       </button>

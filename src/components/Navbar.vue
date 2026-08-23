@@ -51,60 +51,59 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
 <template>
   <!-- Desktop Top Header -->
-  <header class="hidden md:block sticky top-0 z-40 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <header class="hidden md:block sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Brand Logo -->
-        <div class="flex items-center gap-3 cursor-pointer" @click="router.push('/')">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
-            <Building2 class="w-5 h-5 text-white" />
+        <div class="flex items-center gap-3 cursor-pointer select-none" @click="router.push('/')">
+          <div class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-950 font-bold">
+            <Building2 class="w-4 h-4 text-zinc-950" />
           </div>
           <div>
-            <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+            <span class="text-base font-semibold tracking-tight text-zinc-100">
               PropPulse
             </span>
-            <span class="block text-[10px] tracking-wider uppercase font-semibold text-indigo-400 -mt-1">
-              Personal Property Manager
+            <span class="block text-[10px] tracking-wider uppercase font-medium text-zinc-500 -mt-0.5">
+              Property Management
             </span>
           </div>
         </div>
 
         <!-- Desktop Navigation Links -->
-        <nav class="flex items-center gap-1 bg-slate-950/60 p-1.5 rounded-2xl border border-slate-800/80">
+        <nav class="flex items-center gap-1 bg-zinc-900/80 p-1 rounded-xl border border-zinc-800">
           <RouterLink
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
-            class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
+            class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all"
             :class="[
               route.path === item.path
-                ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                ? 'bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700/60'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
             ]"
           >
-            <component :is="item.icon" class="w-4 h-4" />
+            <component :is="item.icon" class="w-3.5 h-3.5" />
             <span>{{ item.name }}</span>
             <span
               v-if="item.name === 'Dashboard' && urgentSnagsCount > 0"
-              class="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40"
+              class="px-1.5 py-0.2 text-[10px] font-mono rounded bg-zinc-700 text-zinc-200"
             >
               {{ urgentSnagsCount }}
             </span>
           </RouterLink>
         </nav>
 
-        <!-- Right Quick Action Trigger -->
-        <div class="relative flex items-center gap-3">
+        <!-- Right Action Trigger -->
+        <div class="flex items-center gap-4">
           <!-- Summary Pill -->
-          <div class="hidden lg:flex items-center gap-3 px-3.5 py-1.5 rounded-xl bg-slate-800/50 border border-slate-700/60 text-xs">
-            <div class="flex items-center gap-1.5 text-slate-300">
-              <span class="text-slate-400 font-medium">Monthly:</span>
-              <span class="font-bold text-slate-100 font-mono">{{ store.formatCurrency(store.totalMonthlySpend) }}</span>
+          <div class="hidden lg:flex items-center gap-3 px-3.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs">
+            <div class="flex items-center gap-1.5 text-zinc-300">
+              <span class="text-zinc-500">Monthly:</span>
+              <span class="font-semibold text-zinc-100 font-mono">{{ store.formatCurrency(store.totalMonthlySpend) }}</span>
             </div>
-            <div class="h-3.5 w-px bg-slate-700"></div>
-            <div class="flex items-center gap-1.5" :class="urgentSnagsCount > 0 ? 'text-amber-400' : 'text-emerald-400'">
-              <span class="w-2 h-2 rounded-full" :class="urgentSnagsCount > 0 ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'"></span>
-              <span>{{ urgentSnagsCount > 0 ? `${urgentSnagsCount} urgent snags` : 'All systems clear' }}</span>
+            <div class="h-3 w-px bg-zinc-800"></div>
+            <div class="text-zinc-400 font-medium">
+              {{ urgentSnagsCount > 0 ? `${urgentSnagsCount} urgent tasks` : 'All tasks clear' }}
             </div>
           </div>
 
@@ -112,92 +111,74 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
           <div class="relative">
             <button
               @click="showQuickMenu = !showQuickMenu"
-              class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-medium text-sm shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
+              class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-xs transition-all active:scale-98 shadow-sm"
             >
-              <Plus class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-45': showQuickMenu }" />
+              <Plus class="w-3.5 h-3.5 transition-transform duration-150" :class="{ 'rotate-45': showQuickMenu }" />
               <span>Quick Add</span>
             </button>
 
             <!-- Dropdown Menu -->
             <Transition
-              enter-active-class="transition duration-150 ease-out"
-              enter-from-class="transform scale-95 opacity-0 -translate-y-2"
+              enter-active-class="transition duration-100 ease-out"
+              enter-from-class="transform scale-95 opacity-0 -translate-y-1"
               enter-to-class="transform scale-100 opacity-100 translate-y-0"
-              leave-active-class="transition duration-100 ease-in"
+              leave-active-class="transition duration-75 ease-in"
               leave-from-class="transform scale-100 opacity-100 translate-y-0"
-              leave-to-class="transform scale-95 opacity-0 -translate-y-2"
+              leave-to-class="transform scale-95 opacity-0 -translate-y-1"
             >
               <div
                 v-if="showQuickMenu"
-                class="absolute right-0 mt-2 w-56 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 divide-y divide-slate-800"
+                class="absolute right-0 mt-2 w-52 rounded-xl bg-zinc-900 border border-zinc-800 shadow-xl p-1.5 z-50 divide-y divide-zinc-800/80"
               >
-                <div class="space-y-1 pb-1.5">
+                <div class="space-y-0.5 pb-1">
                   <button
                     @click="triggerAction('snag')"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:bg-rose-500/10 hover:text-rose-300 transition-colors text-left"
+                    class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white transition-colors text-left"
                   >
-                    <div class="p-1.5 rounded-lg bg-rose-500/20 text-rose-400">
-                      <Wrench class="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div>Log Snag / Task</div>
-                      <div class="text-[10px] text-slate-400 font-normal">Report urgent repair or task</div>
-                    </div>
+                    <Wrench class="w-3.5 h-3.5 text-zinc-400" />
+                    <span>Log Snag / Repair</span>
                   </button>
 
                   <button
                     @click="triggerAction('expense')"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-300 transition-colors text-left"
+                    class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white transition-colors text-left"
                   >
-                    <div class="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
-                      <Receipt class="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div>Add Expense / Bill</div>
-                      <div class="text-[10px] text-slate-400 font-normal">Rates, levies, insurance</div>
-                    </div>
+                    <Receipt class="w-3.5 h-3.5 text-zinc-400" />
+                    <span>Add Expense / Bill</span>
                   </button>
                 </div>
 
-                <div class="space-y-1 pt-1.5">
+                <div class="space-y-0.5 pt-1">
                   <button
                     @click="triggerAction('property')"
-                    class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-indigo-500/10 hover:text-indigo-300 transition-colors text-left"
+                    class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white transition-colors text-left"
                   >
-                    <div class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400">
-                      <Building2 class="w-4 h-4" />
-                    </div>
-                    <div>New Property</div>
+                    <Building2 class="w-3.5 h-3.5 text-zinc-400" />
+                    <span>New Property</span>
                   </button>
 
                   <button
                     @click="triggerAction('contact')"
-                    class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-blue-500/10 hover:text-blue-300 transition-colors text-left"
+                    class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white transition-colors text-left"
                   >
-                    <div class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400">
-                      <UserPlus class="w-4 h-4" />
-                    </div>
-                    <div>New Contact</div>
+                    <UserPlus class="w-3.5 h-3.5 text-zinc-400" />
+                    <span>New Contact</span>
                   </button>
 
                   <button
                     @click="triggerAction('vault')"
-                    class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-amber-500/10 hover:text-amber-300 transition-colors text-left"
+                    class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white transition-colors text-left"
                   >
-                    <div class="p-1.5 rounded-lg bg-amber-500/20 text-amber-400">
-                      <KeyRound class="w-4 h-4" />
-                    </div>
-                    <div>Add Key / Meter PIN</div>
+                    <KeyRound class="w-3.5 h-3.5 text-zinc-400" />
+                    <span>Add Key / Meter Code</span>
                   </button>
 
                   <button
                     @click="triggerAction('note')"
-                    class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-700/50 hover:text-slate-100 transition-colors text-left"
+                    class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white transition-colors text-left"
                   >
-                    <div class="p-1.5 rounded-lg bg-slate-700/50 text-slate-300">
-                      <FileText class="w-4 h-4" />
-                    </div>
-                    <div>Quick Note / Log</div>
+                    <FileText class="w-3.5 h-3.5 text-zinc-400" />
+                    <span>Quick Note</span>
                   </button>
                 </div>
               </div>
@@ -208,120 +189,106 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
     </div>
   </header>
 
-  <!-- Mobile Top Minimal Header -->
-  <header class="md:hidden sticky top-0 z-30 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/80 px-4 py-3">
+  <!-- Mobile Top Header -->
+  <header class="md:hidden sticky top-0 z-30 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/80 px-4 py-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2.5" @click="router.push('/')">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-md shadow-indigo-500/20">
-          <Building2 class="w-4 h-4 text-white" />
+        <div class="w-7 h-7 rounded-lg bg-zinc-100 flex items-center justify-center">
+          <Building2 class="w-3.5 h-3.5 text-zinc-950" />
         </div>
-        <span class="font-bold text-base tracking-tight text-white">PropPulse</span>
+        <span class="font-semibold text-sm tracking-tight text-zinc-100">PropPulse</span>
       </div>
 
-      <div class="flex items-center gap-2">
-        <button
-          @click="showQuickMenu = !showQuickMenu"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md active:scale-95 transition-all"
-        >
-          <Plus class="w-4 h-4" />
-          <span>Quick Log</span>
-        </button>
-      </div>
+      <button
+        @click="showQuickMenu = !showQuickMenu"
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 text-zinc-950 text-xs font-semibold active:scale-95 transition-all"
+      >
+        <Plus class="w-3.5 h-3.5" />
+        <span>Action</span>
+      </button>
     </div>
   </header>
 
-  <!-- Mobile Bottom Action Sheet / Quick Menu Modal -->
+  <!-- Mobile Action Drawer -->
   <Teleport to="body">
     <Transition
-      enter-active-class="transition duration-200 ease-out"
+      enter-active-class="transition duration-150 ease-out"
       enter-from-class="opacity-0 translate-y-full"
       enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition duration-150 ease-in"
+      leave-active-class="transition duration-100 ease-in"
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 translate-y-full"
     >
       <div
         v-if="showQuickMenu"
-        class="md:hidden fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm p-4 pb-24"
+        class="md:hidden fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm p-4 pb-24"
         @click.self="showQuickMenu = false"
       >
-        <div class="w-full max-w-sm rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl p-4 space-y-2">
-          <div class="w-12 h-1 bg-slate-700 rounded-full mx-auto mb-3"></div>
-          <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider px-2">Quick Actions</h3>
+        <div class="w-full max-w-sm rounded-2xl bg-zinc-900 border border-zinc-800 p-4 space-y-3">
+          <div class="w-8 h-1 bg-zinc-700 rounded-full mx-auto mb-1"></div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 px-1">Quick Action</h3>
 
-          <div class="grid grid-cols-2 gap-2 pt-1">
+          <div class="grid grid-cols-2 gap-2">
             <button
               @click="triggerAction('snag')"
-              class="flex flex-col items-start p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-200 active:scale-98"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 active:scale-98"
             >
-              <div class="p-2 rounded-xl bg-rose-500/20 text-rose-400 mb-2">
-                <Wrench class="w-5 h-5" />
-              </div>
-              <span class="font-bold text-sm">Log Snag</span>
-              <span class="text-[11px] text-rose-300/70">Urgent or repair task</span>
+              <Wrench class="w-4 h-4 text-zinc-400 mb-2" />
+              <span class="font-semibold text-xs">Log Snag</span>
+              <span class="text-[10px] text-zinc-500">Repairs & tasks</span>
             </button>
 
             <button
               @click="triggerAction('expense')"
-              class="flex flex-col items-start p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 active:scale-98"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 active:scale-98"
             >
-              <div class="p-2 rounded-xl bg-emerald-500/20 text-emerald-400 mb-2">
-                <Receipt class="w-5 h-5" />
-              </div>
-              <span class="font-bold text-sm">Add Expense</span>
-              <span class="text-[11px] text-emerald-300/70">Rates, levies, bills</span>
+              <Receipt class="w-4 h-4 text-zinc-400 mb-2" />
+              <span class="font-semibold text-xs">Add Expense</span>
+              <span class="text-[10px] text-zinc-500">Rates, levies, bills</span>
             </button>
 
             <button
               @click="triggerAction('property')"
-              class="flex flex-col items-start p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 active:scale-98"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 active:scale-98"
             >
-              <div class="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 mb-2">
-                <Building2 class="w-5 h-5" />
-              </div>
-              <span class="font-bold text-sm">New Property</span>
-              <span class="text-[11px] text-indigo-300/70">Units, address, details</span>
+              <Building2 class="w-4 h-4 text-zinc-400 mb-2" />
+              <span class="font-semibold text-xs">New Property</span>
+              <span class="text-[10px] text-zinc-500">Add listing</span>
             </button>
 
             <button
               @click="triggerAction('contact')"
-              class="flex flex-col items-start p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-200 active:scale-98"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 active:scale-98"
             >
-              <div class="p-2 rounded-xl bg-blue-500/20 text-blue-400 mb-2">
-                <UserPlus class="w-5 h-5" />
-              </div>
-              <span class="font-bold text-sm">New Contact</span>
-              <span class="text-[11px] text-blue-300/70">Plumber, tenant, agent</span>
+              <UserPlus class="w-4 h-4 text-zinc-400 mb-2" />
+              <span class="font-semibold text-xs">New Contact</span>
+              <span class="text-[10px] text-zinc-500">Service directory</span>
             </button>
 
             <button
               @click="triggerAction('vault')"
-              class="flex flex-col items-start p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 active:scale-98"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 active:scale-98"
             >
-              <div class="p-2 rounded-xl bg-amber-500/20 text-amber-400 mb-2">
-                <KeyRound class="w-5 h-5" />
-              </div>
-              <span class="font-bold text-sm">Vault Code</span>
-              <span class="text-[11px] text-amber-300/70">Meter #, alarm PIN</span>
+              <KeyRound class="w-4 h-4 text-zinc-400 mb-2" />
+              <span class="font-semibold text-xs">Vault Code</span>
+              <span class="text-[10px] text-zinc-500">Meter # / PIN</span>
             </button>
 
             <button
               @click="triggerAction('note')"
-              class="flex flex-col items-start p-3.5 rounded-2xl bg-slate-800 border border-slate-700 text-slate-200 active:scale-98"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 active:scale-98"
             >
-              <div class="p-2 rounded-xl bg-slate-700 text-slate-300 mb-2">
-                <FileText class="w-5 h-5" />
-              </div>
-              <span class="font-bold text-sm">Quick Note</span>
-              <span class="text-[11px] text-slate-400">Log history / access</span>
+              <FileText class="w-4 h-4 text-zinc-400 mb-2" />
+              <span class="font-semibold text-xs">Quick Note</span>
+              <span class="text-[10px] text-zinc-500">Inspection / log</span>
             </button>
           </div>
 
           <button
             @click="showQuickMenu = false"
-            class="w-full mt-2 py-3 rounded-2xl bg-slate-800 text-slate-300 font-semibold text-sm hover:bg-slate-700 active:scale-98"
+            class="w-full py-2.5 rounded-xl bg-zinc-800 text-zinc-300 font-medium text-xs hover:bg-zinc-700 active:scale-98"
           >
-            Cancel
+            Close
           </button>
         </div>
       </div>
@@ -329,31 +296,31 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
   </Teleport>
 
   <!-- Mobile Bottom Navigation Bar -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-xl border-t border-slate-800/80 px-2 py-1.5 pb-safe">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800/80 px-2 py-1 pb-safe">
     <div class="grid grid-cols-4 items-center justify-around">
       <RouterLink
         v-for="item in navItems"
         :key="item.path"
         :to="item.path"
-        class="flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-colors relative"
+        class="flex flex-col items-center justify-center py-2 px-1 rounded-xl transition-colors relative"
         :class="[
           route.path === item.path
-            ? 'text-indigo-400 font-semibold'
-            : 'text-slate-400 hover:text-slate-200'
+            ? 'text-zinc-100 font-semibold'
+            : 'text-zinc-500 hover:text-zinc-300'
         ]"
       >
         <div class="relative">
           <component
             :is="item.icon"
-            class="w-5 h-5 transition-transform"
-            :class="route.path === item.path ? 'scale-110' : ''"
+            class="w-4 h-4 transition-transform"
+            :class="route.path === item.path ? 'scale-110 text-white' : ''"
           />
           <span
             v-if="item.name === 'Dashboard' && urgentSnagsCount > 0"
-            class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-rose-500 ring-2 ring-slate-900"
+            class="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-zinc-100"
           ></span>
         </div>
-        <span class="text-[11px] mt-1 tracking-tight">{{ item.name }}</span>
+        <span class="text-[10px] mt-1 tracking-tight">{{ item.name }}</span>
       </RouterLink>
     </div>
   </nav>
