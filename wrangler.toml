@@ -1,0 +1,16 @@
+name = "prop-app"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+# Cloudflare D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "proppulse_d1"
+database_id = "proppulse-db-binding"
+migrations_dir = "d1"
+
+# Cloudflare R2 Bucket (optional for media/invoices)
+[[r2_buckets]]
+binding = "UPLOADS_BUCKET"
+bucket_name = "proppulse-uploads"
