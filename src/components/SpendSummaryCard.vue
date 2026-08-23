@@ -46,24 +46,24 @@ function markAllPaid() {
 </script>
 
 <template>
-  <div class="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 sm:p-8">
+  <div class="rounded-2xl bg-white border border-zinc-200 p-6 sm:p-8 shadow-xs">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
       <div class="space-y-1">
         <div class="flex items-center gap-2">
-          <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+          <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500">
             {{ propertyId ? 'Property Monthly Spend' : 'Committed Monthly Spend' }}
           </span>
         </div>
-        <div class="text-3xl sm:text-4xl font-semibold tracking-tight text-white font-mono">
+        <div class="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950 font-mono">
           {{ store.formatCurrency(totalSpend) }}
-          <span class="text-sm font-normal text-zinc-400 font-sans">/ month</span>
+          <span class="text-sm font-normal text-zinc-500 font-sans">/ month</span>
         </div>
       </div>
 
       <button
         v-if="pendingExpensesCount > 0"
         @click="markAllPaid"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-100 text-xs font-medium border border-zinc-700 transition-all active:scale-98 shrink-0 self-start sm:self-center"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-medium transition-all active:scale-98 shrink-0 self-start sm:self-center shadow-xs"
       >
         <CheckCheck class="w-4 h-4 text-zinc-300" />
         <span>Mark Cycle as Settled</span>
@@ -71,30 +71,30 @@ function markAllPaid() {
     </div>
 
     <!-- Progress & Metrics -->
-    <div class="space-y-3 pt-4 border-t border-zinc-800/80">
+    <div class="space-y-3 pt-4 border-t border-zinc-100">
       <div class="flex items-center justify-between text-xs font-medium">
-        <div class="text-zinc-300 font-mono">
-          Settled: <span class="text-white">{{ store.formatCurrency(paidSpend) }}</span>
+        <div class="text-zinc-600 font-mono">
+          Settled: <span class="text-zinc-950 font-semibold">{{ store.formatCurrency(paidSpend) }}</span>
         </div>
-        <div class="text-zinc-400 font-mono">
-          Pending: <span class="text-zinc-200">{{ store.formatCurrency(pendingSpend) }}</span>
+        <div class="text-zinc-600 font-mono">
+          Pending: <span class="text-zinc-950 font-semibold">{{ store.formatCurrency(pendingSpend) }}</span>
         </div>
       </div>
 
       <!-- Minimal Track -->
-      <div class="w-full h-2 bg-zinc-800 rounded-full overflow-hidden flex">
+      <div class="w-full h-2 bg-zinc-100 rounded-full overflow-hidden flex">
         <div
-          class="h-full bg-zinc-200 transition-all duration-300 ease-out"
+          class="h-full bg-zinc-950 transition-all duration-300 ease-out"
           :style="{ width: `${paidProgress}%` }"
         ></div>
       </div>
 
       <div class="flex justify-between items-center text-xs text-zinc-500">
         <span>{{ paidProgress }}% of monthly commitments paid</span>
-        <span v-if="pendingExpensesCount > 0" class="text-zinc-300 font-medium">
+        <span v-if="pendingExpensesCount > 0" class="text-zinc-800 font-medium">
           {{ pendingExpensesCount }} payment{{ pendingExpensesCount === 1 ? '' : 's' }} outstanding
         </span>
-        <span v-else class="text-zinc-400">
+        <span v-else class="text-zinc-600 font-medium">
           All accounts reconciled
         </span>
       </div>

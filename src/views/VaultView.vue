@@ -54,17 +54,17 @@ const filteredVaultItems = computed(() => {
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div class="space-y-1">
-        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950">
           Key Details & Meter Vault
         </h1>
-        <p class="text-xs sm:text-sm text-zinc-400">
+        <p class="text-xs sm:text-sm text-zinc-500">
           Prepaid meters, gate PINs, Wi-Fi keys, and utility references with 1-tap copy
         </p>
       </div>
 
       <button
         @click="openNewVaultModal"
-        class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-sm transition-all active:scale-98 shrink-0 self-start sm:self-center"
+        class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm transition-all active:scale-98 shrink-0 self-start sm:self-center"
       >
         <Plus class="w-3.5 h-3.5" />
         <span>Add Key Detail</span>
@@ -81,14 +81,14 @@ const filteredVaultItems = computed(() => {
             v-model="searchQuery"
             type="text"
             placeholder="Search meters, gate codes, WiFi passwords, account numbers..."
-            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder-zinc-500 text-xs sm:text-sm focus:outline-none focus:border-zinc-500"
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 placeholder-zinc-400 text-xs sm:text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
           />
         </div>
 
         <!-- Property Filter Selector -->
         <select
           v-model="selectedPropertyId"
-          class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-200 text-xs sm:text-sm focus:outline-none focus:border-zinc-500"
+          class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-xs sm:text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
         >
           <option value="All">All Properties ({{ store.properties.length }})</option>
           <option v-for="p in store.properties" :key="p.id" :value="p.id">
@@ -106,8 +106,8 @@ const filteredVaultItems = computed(() => {
           class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border"
           :class="[
             selectedCategory === cat
-              ? 'bg-zinc-800 text-white border-zinc-700 shadow-sm'
-              : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:bg-zinc-800/60 hover:text-zinc-200'
+              ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs font-semibold'
+              : 'bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-100 hover:text-zinc-950'
           ]"
         >
           <span>{{ cat }}</span>
@@ -128,13 +128,13 @@ const filteredVaultItems = computed(() => {
 
     <div
       v-else
-      class="p-12 rounded-2xl bg-zinc-900/60 border border-zinc-800 text-center max-w-md mx-auto"
+      class="p-12 rounded-2xl bg-white border border-zinc-200 text-center max-w-md mx-auto shadow-xs"
     >
-      <h3 class="text-sm font-semibold text-zinc-200">No Vault Items Found</h3>
-      <p class="text-xs text-zinc-400 mt-1">Try changing your search term or category filter.</p>
+      <h3 class="text-sm font-semibold text-zinc-800">No Vault Items Found</h3>
+      <p class="text-xs text-zinc-500 mt-1">Try changing your search term or category filter.</p>
       <button
         @click="searchQuery = ''; selectedCategory = 'All'; selectedPropertyId = 'All'"
-        class="mt-4 px-3.5 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-medium hover:bg-zinc-700"
+        class="mt-4 px-3.5 py-1.5 rounded-lg bg-zinc-100 text-zinc-900 text-xs font-medium hover:bg-zinc-200"
       >
         Clear Filters
       </button>

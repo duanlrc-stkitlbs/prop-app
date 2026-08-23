@@ -104,21 +104,21 @@ function submit() {
     >
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs overflow-y-auto"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-base font-semibold text-zinc-100">
+              <h3 class="text-base font-semibold text-zinc-950">
                 {{ snag ? 'Edit Snag / Task' : 'Log New Snag / Repair' }}
               </h3>
-              <p class="text-xs text-zinc-400">Report repairs, maintenance, and punch list tasks</p>
+              <p class="text-xs text-zinc-500">Report repairs, maintenance, and punch list tasks</p>
             </div>
             <button
               @click="emit('close')"
-              class="p-1 rounded text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+              class="p-1 rounded text-zinc-400 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
             >
               <X class="w-5 h-5" />
             </button>
@@ -127,10 +127,10 @@ function submit() {
           <form @submit.prevent="submit" class="space-y-4">
             <!-- Property Selector -->
             <div class="space-y-1">
-              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Property</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Property</label>
               <select
                 v-model="form.propertyId"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
               >
                 <option v-for="p in store.properties" :key="p.id" :value="p.id">
                   {{ p.name }} ({{ p.address }})
@@ -140,25 +140,25 @@ function submit() {
 
             <!-- Snag Title -->
             <div class="space-y-1">
-              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Task Description</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Task Description</label>
               <input
                 v-model="form.title"
                 type="text"
                 required
                 placeholder="e.g. Geyser valve dripping, Gate remote broken"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
               />
             </div>
 
             <!-- Severity Selector (Pills) -->
             <div class="space-y-1.5">
-              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Severity Level</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Severity Level</label>
               <div class="grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   @click="form.severity = 'Urgent'"
                   class="py-2 px-3 rounded-lg border text-xs font-medium transition-all"
-                  :class="form.severity === 'Urgent' ? 'bg-zinc-100 text-zinc-950 border-zinc-100 font-semibold' : 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:bg-zinc-800'"
+                  :class="form.severity === 'Urgent' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
                 >
                   Urgent
                 </button>
@@ -167,7 +167,7 @@ function submit() {
                   type="button"
                   @click="form.severity = 'Normal'"
                   class="py-2 px-3 rounded-lg border text-xs font-medium transition-all"
-                  :class="form.severity === 'Normal' ? 'bg-zinc-100 text-zinc-950 border-zinc-100 font-semibold' : 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:bg-zinc-800'"
+                  :class="form.severity === 'Normal' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
                 >
                   Normal
                 </button>
@@ -176,7 +176,7 @@ function submit() {
                   type="button"
                   @click="form.severity = 'Cosmetic'"
                   class="py-2 px-3 rounded-lg border text-xs font-medium transition-all"
-                  :class="form.severity === 'Cosmetic' ? 'bg-zinc-100 text-zinc-950 border-zinc-100 font-semibold' : 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:bg-zinc-800'"
+                  :class="form.severity === 'Cosmetic' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
                 >
                   Cosmetic
                 </button>
@@ -185,14 +185,14 @@ function submit() {
 
             <!-- Area / Location -->
             <div class="space-y-1">
-              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Area / Location</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Area / Location</label>
               <input
                 v-model="form.area"
                 type="text"
                 list="area-suggestions"
                 required
                 placeholder="e.g. Kitchen, Master Bath, Balcony"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
               />
               <datalist id="area-suggestions">
                 <option v-for="a in commonAreas" :key="a" :value="a" />
@@ -202,20 +202,20 @@ function submit() {
             <!-- Status & Assigned Contractor -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="space-y-1">
-                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Status</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Status</label>
                 <select
                   v-model="form.status"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
                 >
                   <option v-for="s in statuses" :key="s" :value="s">{{ s }}</option>
                 </select>
               </div>
 
               <div class="space-y-1">
-                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Assign Contractor</label>
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Assign Contractor</label>
                 <select
                   v-model="form.assignedContactId"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm focus:outline-none focus:border-zinc-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
                 >
                   <option value="">-- None assigned --</option>
                   <option v-for="c in store.contacts" :key="c.id" :value="c.id">
@@ -228,7 +228,7 @@ function submit() {
             <!-- Cost Estimates -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="space-y-1">
-                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">
                   Cost Estimate ({{ store.settings.currencySymbol }})
                 </label>
                 <input
@@ -236,12 +236,12 @@ function submit() {
                   type="number"
                   step="any"
                   placeholder="Optional"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 font-mono text-sm focus:outline-none focus:border-zinc-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
                 />
               </div>
 
               <div class="space-y-1">
-                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">
+                <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">
                   Actual Cost ({{ store.settings.currencySymbol }})
                 </label>
                 <input
@@ -249,19 +249,19 @@ function submit() {
                   type="number"
                   step="any"
                   placeholder="When completed"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 font-mono text-sm focus:outline-none focus:border-zinc-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
                 />
               </div>
             </div>
 
             <!-- Notes -->
             <div class="space-y-1">
-              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400">Notes & Diagnostics</label>
+              <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Notes & Diagnostics</label>
               <textarea
                 v-model="form.notes"
                 rows="3"
                 placeholder="Details, part numbers, quotes..."
-                class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 resize-none"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 resize-none"
               ></textarea>
             </div>
 
@@ -269,7 +269,7 @@ function submit() {
             <div class="pt-2">
               <button
                 type="submit"
-                class="w-full py-3 px-4 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 font-semibold text-sm transition-all active:scale-98"
+                class="w-full py-3 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
               >
                 {{ snag ? 'Update Snag' : 'Save Snag' }}
               </button>

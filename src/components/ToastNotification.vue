@@ -19,21 +19,21 @@ const store = usePropertyStore()
         v-if="store.toast"
         class="fixed bottom-20 sm:bottom-6 right-4 left-4 sm:left-auto sm:max-w-sm z-50 pointer-events-auto"
       >
-        <div class="flex items-center gap-3 p-3.5 rounded-xl bg-zinc-900 border border-zinc-700 shadow-2xl text-zinc-100">
-          <div class="shrink-0 text-zinc-300">
-            <CheckCircle2 v-if="store.toast.type === 'success'" class="w-4 h-4 text-zinc-100" />
-            <AlertTriangle v-else-if="store.toast.type === 'warning'" class="w-4 h-4 text-zinc-300" />
-            <AlertCircle v-else-if="store.toast.type === 'error'" class="w-4 h-4 text-zinc-300" />
-            <Info v-else class="w-4 h-4 text-zinc-400" />
+        <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-zinc-300 shadow-xl text-zinc-950">
+          <div class="shrink-0 text-zinc-800">
+            <CheckCircle2 v-if="store.toast.type === 'success'" class="w-4 h-4 text-zinc-950" />
+            <AlertTriangle v-else-if="store.toast.type === 'warning'" class="w-4 h-4 text-zinc-900" />
+            <AlertCircle v-else-if="store.toast.type === 'error'" class="w-4 h-4 text-zinc-900" />
+            <Info v-else class="w-4 h-4 text-zinc-700" />
           </div>
 
-          <p class="text-xs font-medium leading-tight flex-1 text-zinc-200">
+          <p class="text-xs font-medium leading-tight flex-1 text-zinc-900">
             {{ store.toast.message }}
           </p>
 
           <button
             @click="store.toast = null"
-            class="p-1 rounded text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+            class="p-1 rounded text-zinc-400 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
           >
             <X class="w-3.5 h-3.5" />
           </button>
