@@ -112,10 +112,10 @@ async function copyText() {
     >
       <div
         v-if="show && contact"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/30 backdrop-blur-xs"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 space-y-4">
+        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200/90 shadow-2xl p-6 space-y-4">
           <!-- Header -->
           <div class="flex items-center justify-between">
             <div>
@@ -134,29 +134,29 @@ async function copyText() {
           <div v-if="!snag" class="flex gap-2 overflow-x-auto pb-1">
             <button
               @click="selectedTemplate = 'snag'"
-              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border"
-              :class="selectedTemplate === 'snag' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200'"
+              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border shadow-xs"
+              :class="selectedTemplate === 'snag' ? 'bg-zinc-900 text-white border-zinc-900 font-semibold' : 'bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50'"
             >
               Service Booking
             </button>
             <button
               @click="selectedTemplate = 'quote'"
-              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border"
-              :class="selectedTemplate === 'quote' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200'"
+              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border shadow-xs"
+              :class="selectedTemplate === 'quote' ? 'bg-zinc-900 text-white border-zinc-900 font-semibold' : 'bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50'"
             >
               Quote Request
             </button>
             <button
               @click="selectedTemplate = 'rent'"
-              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border"
-              :class="selectedTemplate === 'rent' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200'"
+              class="px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors border shadow-xs"
+              :class="selectedTemplate === 'rent' ? 'bg-zinc-900 text-white border-zinc-900 font-semibold' : 'bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50'"
             >
               Rent / Levy Check
             </button>
           </div>
 
           <!-- Snag info box if attached -->
-          <div v-if="snag" class="p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-xs space-y-1">
+          <div v-if="snag" class="p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-xs space-y-1">
             <div class="flex items-center gap-1.5 text-zinc-800 font-medium">
               <Wrench class="w-3.5 h-3.5 text-zinc-600" />
               <span>Attached Task: {{ snag.title }}</span>
@@ -172,7 +172,7 @@ async function copyText() {
             <textarea
               v-model="customMessage"
               rows="6"
-              class="w-full px-3.5 py-3 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 resize-none font-sans"
+              class="w-full px-3.5 py-3 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs resize-none font-sans"
               placeholder="Type message..."
             ></textarea>
           </div>
@@ -181,16 +181,16 @@ async function copyText() {
           <div class="grid grid-cols-2 gap-3 pt-2">
             <button
               @click="copyText"
-              class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 font-medium text-xs border border-zinc-200 transition-all active:scale-98"
+              class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 font-medium text-xs border border-zinc-200 shadow-xs transition-all active:scale-98"
             >
-              <Check v-if="copied" class="w-4 h-4 text-zinc-950" />
+              <Check v-if="copied" class="w-4 h-4 text-emerald-600" />
               <Copy v-else class="w-4 h-4 text-zinc-600" />
               <span>{{ copied ? 'Copied' : 'Copy Text' }}</span>
             </button>
 
             <button
               @click="sendWhatsApp"
-              class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-xs transition-all active:scale-98"
+              class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs transition-all active:scale-98 shadow-sm"
             >
               <Send class="w-4 h-4" />
               <span>Open WhatsApp</span>

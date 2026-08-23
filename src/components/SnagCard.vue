@@ -41,9 +41,9 @@ function cycleStatus() {
     class="flex flex-col justify-between p-5 rounded-2xl bg-white border transition-colors duration-150 shadow-xs"
     :class="[
       snag.status === 'Resolved'
-        ? 'border-zinc-200 opacity-60 bg-zinc-50/50'
+        ? 'border-zinc-200/80 opacity-60 bg-zinc-50/40'
         : snag.severity === 'Urgent'
-        ? 'border-zinc-950 shadow-sm ring-1 ring-zinc-950/10'
+        ? 'border-rose-200 bg-rose-50/10 shadow-xs ring-1 ring-rose-500/10'
         : 'border-zinc-200 hover:border-zinc-300'
     ]"
   >
@@ -51,7 +51,7 @@ function cycleStatus() {
       <!-- Top Row: Area Tag & Severity -->
       <div class="flex items-center justify-between gap-2 flex-wrap">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-100 text-zinc-800 border border-zinc-200">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-100/90 text-zinc-800 border border-zinc-200/80">
             <MapPin class="w-3 h-3 text-zinc-500" />
             {{ snag.area }}
           </span>
@@ -60,8 +60,10 @@ function cycleStatus() {
             class="px-2 py-0.5 rounded text-[11px] font-medium border"
             :class="[
               snag.severity === 'Urgent'
-                ? 'bg-zinc-950 text-white border-zinc-950 font-semibold'
-                : 'bg-zinc-100 text-zinc-700 border-zinc-200'
+                ? 'bg-rose-50 text-rose-700 border-rose-200 font-semibold'
+                : snag.severity === 'Normal'
+                ? 'bg-zinc-100 text-zinc-700 border-zinc-200'
+                : 'bg-zinc-50 text-zinc-600 border-zinc-200'
             ]"
           >
             {{ snag.severity }}
@@ -83,8 +85,8 @@ function cycleStatus() {
           class="mt-0.5 shrink-0 text-zinc-400 hover:text-zinc-950 transition-colors"
           :title="snag.status === 'Resolved' ? 'Reopen task' : 'Mark as resolved'"
         >
-          <CheckCircle2 v-if="snag.status === 'Resolved'" class="w-5 h-5 text-zinc-900" />
-          <Circle v-else class="w-5 h-5 text-zinc-400 hover:text-zinc-900" />
+          <CheckCircle2 v-if="snag.status === 'Resolved'" class="w-5 h-5 text-emerald-600" />
+          <Circle v-else class="w-5 h-5 text-zinc-300 hover:text-zinc-600" />
         </button>
 
         <div class="flex-1 min-w-0">
@@ -109,13 +111,16 @@ function cycleStatus() {
         class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border transition-colors"
         :class="[
           snag.status === 'Resolved'
-            ? 'bg-zinc-100 text-zinc-500 border-zinc-200'
+            ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
             : snag.status === 'In Progress'
-            ? 'bg-zinc-950 text-white border-zinc-950'
-            : 'bg-zinc-50 text-zinc-800 border-zinc-200 hover:bg-zinc-100'
+            ? 'bg-sky-50 text-sky-700 border-sky-200'
+            : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'
         ]"
       >
-        <span class="w-1.5 h-1.5 rounded-full" :class="snag.status === 'Resolved' ? 'bg-zinc-400' : snag.status === 'In Progress' ? 'bg-white' : 'bg-zinc-600'"></span>
+        <span
+          class="w-1.5 h-1.5 rounded-full"
+          :class="snag.status === 'Resolved' ? 'bg-emerald-500' : snag.status === 'In Progress' ? 'bg-sky-500' : 'bg-zinc-400'"
+        ></span>
         <span>{{ snag.status }}</span>
       </button>
 

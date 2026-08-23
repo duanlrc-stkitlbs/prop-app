@@ -115,10 +115,10 @@ function submit() {
     >
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs overflow-y-auto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/30 backdrop-blur-xs overflow-y-auto"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200/90 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between">
             <div>
@@ -145,7 +145,7 @@ function submit() {
                   type="text"
                   required
                   placeholder="e.g. Kloof Street Penthouse"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
               </div>
 
@@ -155,7 +155,7 @@ function submit() {
                   v-model="form.nickname"
                   type="text"
                   placeholder="e.g. City Penthouse"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ function submit() {
                 type="text"
                 required
                 placeholder="e.g. 42 Kloof St, Gardens, Cape Town"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               />
             </div>
 
@@ -178,7 +178,7 @@ function submit() {
                 <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Property Type</label>
                 <select
                   v-model="form.type"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 >
                   <option v-for="t in types" :key="t" :value="t">{{ t }}</option>
                 </select>
@@ -188,7 +188,7 @@ function submit() {
                 <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Occupancy Status</label>
                 <select
                   v-model="form.status"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 >
                   <option v-for="s in statuses" :key="s" :value="s">{{ s }}</option>
                 </select>
@@ -205,7 +205,7 @@ function submit() {
                 type="number"
                 step="any"
                 placeholder="Optional"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               />
             </div>
 
@@ -220,12 +220,12 @@ function submit() {
                   @keydown.enter.prevent="addUnit"
                   type="text"
                   placeholder="Add unit (press Enter)"
-                  class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                  class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
                 <button
                   type="button"
                   @click="addUnit"
-                  class="px-3 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 font-medium text-xs border border-zinc-200 transition-colors"
+                  class="px-3 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 font-medium text-xs border border-zinc-200 transition-colors shadow-xs"
                 >
                   <Plus class="w-4 h-4" />
                 </button>
@@ -254,7 +254,7 @@ function submit() {
             <div class="pt-2">
               <button
                 type="submit"
-                class="w-full py-3 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
+                class="w-full py-3 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
               >
                 {{ property ? 'Update Property' : 'Save Property' }}
               </button>

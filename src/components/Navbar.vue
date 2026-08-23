@@ -51,13 +51,13 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
 <template>
   <!-- Desktop Top Header -->
-  <header class="hidden md:block sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-zinc-200">
+  <header class="hidden md:block sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-zinc-200/80">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Brand Logo -->
         <div class="flex items-center gap-3 cursor-pointer select-none" @click="router.push('/')">
-          <div class="w-8 h-8 rounded-lg bg-zinc-950 flex items-center justify-center text-white font-bold">
-            <Building2 class="w-4 h-4 text-white" />
+          <div class="w-8 h-8 rounded-lg bg-white border border-zinc-200 flex items-center justify-center text-zinc-900 font-bold shadow-xs">
+            <Building2 class="w-4 h-4 text-zinc-900" />
           </div>
           <div>
             <span class="text-base font-semibold tracking-tight text-zinc-950">
@@ -70,7 +70,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
         </div>
 
         <!-- Desktop Navigation Links -->
-        <nav class="flex items-center gap-1 bg-zinc-100/90 p-1 rounded-xl border border-zinc-200">
+        <nav class="flex items-center gap-1 bg-zinc-100/80 p-1 rounded-xl border border-zinc-200/80">
           <RouterLink
             v-for="item in navItems"
             :key="item.path"
@@ -78,15 +78,15 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
             class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all"
             :class="[
               route.path === item.path
-                ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200 font-semibold'
-                : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-200/50'
+                ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200/80 font-semibold'
+                : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'
             ]"
           >
             <component :is="item.icon" class="w-3.5 h-3.5" />
             <span>{{ item.name }}</span>
             <span
               v-if="item.name === 'Dashboard' && urgentSnagsCount > 0"
-              class="px-1.5 py-0.2 text-[10px] font-mono rounded bg-zinc-200 text-zinc-900 font-semibold"
+              class="px-1.5 py-0.2 text-[10px] font-mono rounded bg-rose-50 text-rose-700 border border-rose-200 font-semibold"
             >
               {{ urgentSnagsCount }}
             </span>
@@ -96,7 +96,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
         <!-- Right Action Trigger -->
         <div class="flex items-center gap-4">
           <!-- Summary Pill -->
-          <div class="hidden lg:flex items-center gap-3 px-3.5 py-1.5 rounded-lg bg-white border border-zinc-200 text-xs shadow-xs">
+          <div class="hidden lg:flex items-center gap-3 px-3.5 py-1.5 rounded-lg bg-white border border-zinc-200/80 text-xs shadow-xs">
             <div class="flex items-center gap-1.5 text-zinc-700">
               <span class="text-zinc-500">Monthly:</span>
               <span class="font-semibold text-zinc-950 font-mono">{{ store.formatCurrency(store.totalMonthlySpend) }}</span>
@@ -111,7 +111,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
           <div class="relative">
             <button
               @click="showQuickMenu = !showQuickMenu"
-              class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-xs transition-all active:scale-98 shadow-sm"
+              class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs transition-all active:scale-98 shadow-sm"
             >
               <Plus class="w-3.5 h-3.5 transition-transform duration-150" :class="{ 'rotate-45': showQuickMenu }" />
               <span>Quick Add</span>
@@ -190,18 +190,18 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
   </header>
 
   <!-- Mobile Top Header -->
-  <header class="md:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-zinc-200 px-4 py-3">
+  <header class="md:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-zinc-200/80 px-4 py-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2.5" @click="router.push('/')">
-        <div class="w-7 h-7 rounded-lg bg-zinc-950 flex items-center justify-center">
-          <Building2 class="w-3.5 h-3.5 text-white" />
+        <div class="w-7 h-7 rounded-lg bg-white border border-zinc-200 flex items-center justify-center shadow-xs">
+          <Building2 class="w-3.5 h-3.5 text-zinc-900" />
         </div>
         <span class="font-semibold text-sm tracking-tight text-zinc-950">PropPulse</span>
       </div>
 
       <button
         @click="showQuickMenu = !showQuickMenu"
-        class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-950 text-white text-xs font-semibold active:scale-95 transition-all shadow-xs"
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 text-white text-xs font-semibold active:scale-95 transition-all shadow-xs"
       >
         <Plus class="w-3.5 h-3.5" />
         <span>Action</span>
@@ -221,17 +221,17 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
     >
       <div
         v-if="showQuickMenu"
-        class="md:hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-xs p-4 pb-24"
+        class="md:hidden fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/30 backdrop-blur-xs p-4 pb-24"
         @click.self="showQuickMenu = false"
       >
-        <div class="w-full max-w-sm rounded-2xl bg-white border border-zinc-200 shadow-2xl p-4 space-y-3">
-          <div class="w-8 h-1 bg-zinc-300 rounded-full mx-auto mb-1"></div>
+        <div class="w-full max-w-sm rounded-2xl bg-white border border-zinc-200/90 shadow-2xl p-4 space-y-3">
+          <div class="w-8 h-1 bg-zinc-200 rounded-full mx-auto mb-1"></div>
           <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 px-1">Quick Action</h3>
 
           <div class="grid grid-cols-2 gap-2">
             <button
               @click="triggerAction('snag')"
-              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-800 active:scale-98 hover:bg-zinc-100"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-800 active:scale-98 hover:bg-zinc-100/80 transition-colors"
             >
               <Wrench class="w-4 h-4 text-zinc-600 mb-2" />
               <span class="font-semibold text-xs text-zinc-950">Log Snag</span>
@@ -240,7 +240,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
             <button
               @click="triggerAction('expense')"
-              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-800 active:scale-98 hover:bg-zinc-100"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-800 active:scale-98 hover:bg-zinc-100/80 transition-colors"
             >
               <Receipt class="w-4 h-4 text-zinc-600 mb-2" />
               <span class="font-semibold text-xs text-zinc-950">Add Expense</span>
@@ -249,7 +249,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
             <button
               @click="triggerAction('property')"
-              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-800 active:scale-98 hover:bg-zinc-100"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-800 active:scale-98 hover:bg-zinc-100/80 transition-colors"
             >
               <Building2 class="w-4 h-4 text-zinc-600 mb-2" />
               <span class="font-semibold text-xs text-zinc-950">New Property</span>
@@ -258,7 +258,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
             <button
               @click="triggerAction('contact')"
-              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-800 active:scale-98 hover:bg-zinc-100"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-800 active:scale-98 hover:bg-zinc-100/80 transition-colors"
             >
               <UserPlus class="w-4 h-4 text-zinc-600 mb-2" />
               <span class="font-semibold text-xs text-zinc-950">New Contact</span>
@@ -267,7 +267,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
             <button
               @click="triggerAction('vault')"
-              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-800 active:scale-98 hover:bg-zinc-100"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-800 active:scale-98 hover:bg-zinc-100/80 transition-colors"
             >
               <KeyRound class="w-4 h-4 text-zinc-600 mb-2" />
               <span class="font-semibold text-xs text-zinc-950">Vault Code</span>
@@ -276,7 +276,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
             <button
               @click="triggerAction('note')"
-              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-800 active:scale-98 hover:bg-zinc-100"
+              class="flex flex-col items-start p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-800 active:scale-98 hover:bg-zinc-100/80 transition-colors"
             >
               <FileText class="w-4 h-4 text-zinc-600 mb-2" />
               <span class="font-semibold text-xs text-zinc-950">Quick Note</span>
@@ -286,7 +286,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
 
           <button
             @click="showQuickMenu = false"
-            class="w-full py-2.5 rounded-xl bg-zinc-100 text-zinc-700 font-medium text-xs hover:bg-zinc-200 active:scale-98"
+            class="w-full py-2.5 rounded-xl bg-zinc-100 text-zinc-700 font-medium text-xs hover:bg-zinc-200 active:scale-98 transition-colors"
           >
             Close
           </button>
@@ -296,7 +296,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
   </Teleport>
 
   <!-- Mobile Bottom Navigation Bar -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-zinc-200 px-2 py-1 pb-safe shadow-md">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-zinc-200/80 px-2 py-1 pb-safe shadow-md">
     <div class="grid grid-cols-4 items-center justify-around">
       <RouterLink
         v-for="item in navItems"
@@ -317,7 +317,7 @@ function triggerAction(action: 'expense' | 'snag' | 'property' | 'contact' | 'va
           />
           <span
             v-if="item.name === 'Dashboard' && urgentSnagsCount > 0"
-            class="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-zinc-950"
+            class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white"
           ></span>
         </div>
         <span class="text-[10px] mt-1 tracking-tight">{{ item.name }}</span>

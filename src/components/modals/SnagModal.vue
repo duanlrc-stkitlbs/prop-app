@@ -104,10 +104,10 @@ function submit() {
     >
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs overflow-y-auto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/30 backdrop-blur-xs overflow-y-auto"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200/90 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between">
             <div>
@@ -130,7 +130,7 @@ function submit() {
               <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Property</label>
               <select
                 v-model="form.propertyId"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               >
                 <option v-for="p in store.properties" :key="p.id" :value="p.id">
                   {{ p.name }} ({{ p.address }})
@@ -146,7 +146,7 @@ function submit() {
                 type="text"
                 required
                 placeholder="e.g. Geyser valve dripping, Gate remote broken"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               />
             </div>
 
@@ -158,7 +158,7 @@ function submit() {
                   type="button"
                   @click="form.severity = 'Urgent'"
                   class="py-2 px-3 rounded-lg border text-xs font-medium transition-all"
-                  :class="form.severity === 'Urgent' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
+                  :class="form.severity === 'Urgent' ? 'bg-rose-50 text-rose-700 border-rose-200 font-semibold shadow-xs' : 'bg-zinc-50/80 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
                 >
                   Urgent
                 </button>
@@ -167,7 +167,7 @@ function submit() {
                   type="button"
                   @click="form.severity = 'Normal'"
                   class="py-2 px-3 rounded-lg border text-xs font-medium transition-all"
-                  :class="form.severity === 'Normal' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
+                  :class="form.severity === 'Normal' ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs' : 'bg-zinc-50/80 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
                 >
                   Normal
                 </button>
@@ -176,7 +176,7 @@ function submit() {
                   type="button"
                   @click="form.severity = 'Cosmetic'"
                   class="py-2 px-3 rounded-lg border text-xs font-medium transition-all"
-                  :class="form.severity === 'Cosmetic' ? 'bg-zinc-950 text-white border-zinc-950 font-semibold' : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
+                  :class="form.severity === 'Cosmetic' ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-xs' : 'bg-zinc-50/80 text-zinc-700 border-zinc-200 hover:bg-zinc-100'"
                 >
                   Cosmetic
                 </button>
@@ -192,7 +192,7 @@ function submit() {
                 list="area-suggestions"
                 required
                 placeholder="e.g. Kitchen, Master Bath, Balcony"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               />
               <datalist id="area-suggestions">
                 <option v-for="a in commonAreas" :key="a" :value="a" />
@@ -205,7 +205,7 @@ function submit() {
                 <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Status</label>
                 <select
                   v-model="form.status"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 >
                   <option v-for="s in statuses" :key="s" :value="s">{{ s }}</option>
                 </select>
@@ -215,7 +215,7 @@ function submit() {
                 <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Assign Contractor</label>
                 <select
                   v-model="form.assignedContactId"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 >
                   <option value="">-- None assigned --</option>
                   <option v-for="c in store.contacts" :key="c.id" :value="c.id">
@@ -236,7 +236,7 @@ function submit() {
                   type="number"
                   step="any"
                   placeholder="Optional"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
               </div>
 
@@ -249,7 +249,7 @@ function submit() {
                   type="number"
                   step="any"
                   placeholder="When completed"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
               </div>
             </div>
@@ -261,7 +261,7 @@ function submit() {
                 v-model="form.notes"
                 rows="3"
                 placeholder="Details, part numbers, quotes..."
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 resize-none"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 resize-none shadow-xs"
               ></textarea>
             </div>
 
@@ -269,7 +269,7 @@ function submit() {
             <div class="pt-2">
               <button
                 type="submit"
-                class="w-full py-3 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
+                class="w-full py-3 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
               >
                 {{ snag ? 'Update Snag' : 'Save Snag' }}
               </button>

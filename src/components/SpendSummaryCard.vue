@@ -63,7 +63,7 @@ function markAllPaid() {
       <button
         v-if="pendingExpensesCount > 0"
         @click="markAllPaid"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-medium transition-all active:scale-98 shrink-0 self-start sm:self-center shadow-xs"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-medium transition-all active:scale-98 shrink-0 self-start sm:self-center shadow-xs"
       >
         <CheckCheck class="w-4 h-4 text-zinc-300" />
         <span>Mark Cycle as Settled</span>
@@ -84,7 +84,7 @@ function markAllPaid() {
       <!-- Minimal Track -->
       <div class="w-full h-2 bg-zinc-100 rounded-full overflow-hidden flex">
         <div
-          class="h-full bg-zinc-950 transition-all duration-300 ease-out"
+          class="h-full bg-zinc-900 transition-all duration-300 ease-out"
           :style="{ width: `${paidProgress}%` }"
         ></div>
       </div>

@@ -81,7 +81,7 @@ const urgentSnags = computed(() => openSnags.value.filter(s => s.severity === 'U
     <!-- Bottom Stat Row -->
     <div class="pt-4 border-t border-zinc-100 grid grid-cols-2 gap-3 mt-4">
       <!-- Monthly Spend -->
-      <div class="p-3 rounded-xl bg-zinc-50 border border-zinc-200">
+      <div class="p-3 rounded-xl bg-zinc-50/80 border border-zinc-200/80">
         <div class="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Monthly Spend</div>
         <div class="text-xs font-semibold text-zinc-950 font-mono mt-0.5 truncate">
           {{ store.formatCurrency(monthlySpend) }}
@@ -89,9 +89,15 @@ const urgentSnags = computed(() => openSnags.value.filter(s => s.severity === 'U
       </div>
 
       <!-- Snag indicator -->
-      <div class="p-3 rounded-xl bg-zinc-50 border border-zinc-200">
+      <div
+        class="p-3 rounded-xl border"
+        :class="urgentSnags.length > 0 ? 'bg-rose-50/20 border-rose-200/80' : 'bg-zinc-50/80 border-zinc-200/80'"
+      >
         <div class="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Tasks & Snags</div>
-        <div class="text-xs font-semibold text-zinc-900 mt-0.5 truncate">
+        <div
+          class="text-xs font-semibold mt-0.5 truncate"
+          :class="urgentSnags.length > 0 ? 'text-rose-700' : 'text-zinc-900'"
+        >
           {{ openSnags.length > 0 ? `${openSnags.length} Open (${urgentSnags.length} Urgent)` : 'All Clear' }}
         </div>
       </div>

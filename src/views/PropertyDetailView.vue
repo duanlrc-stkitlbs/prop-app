@@ -167,7 +167,7 @@ function confirmDeleteProperty() {
 
         <!-- Right Metric Strip -->
         <div class="flex items-center gap-3 shrink-0">
-          <div class="p-4 rounded-xl bg-zinc-50 border border-zinc-200 text-center min-w-[130px]">
+          <div class="p-4 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-center min-w-[130px]">
             <div class="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Monthly Spend</div>
             <div class="text-base font-semibold text-zinc-950 font-mono mt-0.5">
               {{ store.formatCurrency(store.getPropertyMonthlySpend(property.id)) }}
@@ -175,11 +175,14 @@ function confirmDeleteProperty() {
           </div>
 
           <div
-            class="p-4 rounded-xl bg-zinc-50 border text-center min-w-[130px]"
-            :class="propertyOpenSnags.length > 0 ? 'border-zinc-400' : 'border-zinc-200'"
+            class="p-4 rounded-xl border text-center min-w-[130px]"
+            :class="propertyOpenSnags.length > 0 ? 'border-rose-200/80 bg-rose-50/10' : 'bg-zinc-50/80 border-zinc-200/80'"
           >
             <div class="text-[10px] uppercase font-medium text-zinc-500 tracking-wider">Open Tasks</div>
-            <div class="text-base font-semibold text-zinc-950 font-mono mt-0.5">
+            <div
+              class="text-base font-semibold font-mono mt-0.5"
+              :class="propertyOpenSnags.length > 0 ? 'text-rose-700' : 'text-zinc-950'"
+            >
               {{ propertyOpenSnags.length }}
             </div>
           </div>
@@ -188,11 +191,11 @@ function confirmDeleteProperty() {
     </div>
 
     <!-- Navigation Tabs -->
-    <div class="flex items-center gap-1.5 overflow-x-auto p-1.5 rounded-xl bg-zinc-100/90 border border-zinc-200">
+    <div class="flex items-center gap-1.5 overflow-x-auto p-1.5 rounded-xl bg-zinc-100/80 border border-zinc-200/80">
       <button
         @click="activeTab = 'overview'"
         class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
-        :class="activeTab === 'overview' ? 'bg-white text-zinc-950 shadow-xs font-semibold' : 'text-zinc-600 hover:text-zinc-950'"
+        :class="activeTab === 'overview' ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200/80 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'"
       >
         <KeyRound class="w-3.5 h-3.5" />
         <span>Key Vault ({{ propertyVault.length }})</span>
@@ -201,7 +204,7 @@ function confirmDeleteProperty() {
       <button
         @click="activeTab = 'expenses'"
         class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
-        :class="activeTab === 'expenses' ? 'bg-white text-zinc-950 shadow-xs font-semibold' : 'text-zinc-600 hover:text-zinc-950'"
+        :class="activeTab === 'expenses' ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200/80 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'"
       >
         <Receipt class="w-3.5 h-3.5" />
         <span>Expenses & Spend ({{ propertyExpenses.length }})</span>
@@ -210,7 +213,7 @@ function confirmDeleteProperty() {
       <button
         @click="activeTab = 'snags'"
         class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
-        :class="activeTab === 'snags' ? 'bg-white text-zinc-950 shadow-xs font-semibold' : 'text-zinc-600 hover:text-zinc-950'"
+        :class="activeTab === 'snags' ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200/80 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'"
       >
         <Wrench class="w-3.5 h-3.5" />
         <span>Snags ({{ propertySnags.length }})</span>
@@ -219,7 +222,7 @@ function confirmDeleteProperty() {
       <button
         @click="activeTab = 'contacts'"
         class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
-        :class="activeTab === 'contacts' ? 'bg-white text-zinc-950 shadow-xs font-semibold' : 'text-zinc-600 hover:text-zinc-950'"
+        :class="activeTab === 'contacts' ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200/80 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'"
       >
         <Users class="w-3.5 h-3.5" />
         <span>Contacts ({{ propertyContacts.length }})</span>
@@ -228,7 +231,7 @@ function confirmDeleteProperty() {
       <button
         @click="activeTab = 'notes'"
         class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
-        :class="activeTab === 'notes' ? 'bg-white text-zinc-950 shadow-xs font-semibold' : 'text-zinc-600 hover:text-zinc-950'"
+        :class="activeTab === 'notes' ? 'bg-white text-zinc-950 shadow-xs border border-zinc-200/80 font-semibold' : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'"
       >
         <FileText class="w-3.5 h-3.5" />
         <span>Notes & Log ({{ propertyNotes.length }})</span>
@@ -245,7 +248,7 @@ function confirmDeleteProperty() {
 
         <button
           @click="activeVault = null; showVaultModal = true"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200/90 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
         >
           <Plus class="w-3.5 h-3.5" />
           <span>Add Code</span>
@@ -261,7 +264,7 @@ function confirmDeleteProperty() {
         />
       </div>
 
-      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200 text-center shadow-xs">
+      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200/80 text-center shadow-xs">
         <h4 class="text-sm font-semibold text-zinc-700">No Key Details Saved</h4>
         <p class="text-xs text-zinc-500 mt-1">Store prepaid meter numbers or alarm PINs.</p>
       </div>
@@ -279,7 +282,7 @@ function confirmDeleteProperty() {
 
         <button
           @click="activeExpense = null; showExpenseModal = true"
-          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm active:scale-98 transition-all"
+          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm active:scale-98 transition-all"
         >
           <Plus class="w-3.5 h-3.5" />
           <span>Add Expense</span>
@@ -299,8 +302,8 @@ function confirmDeleteProperty() {
               class="mt-1 shrink-0 text-zinc-400 hover:text-zinc-950 transition-colors"
               :title="exp.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'"
             >
-              <CheckCircle2 v-if="exp.isPaid" class="w-5 h-5 text-zinc-950" />
-              <Circle v-else class="w-5 h-5 text-zinc-400 hover:text-zinc-950" />
+              <CheckCircle2 v-if="exp.isPaid" class="w-5 h-5 text-emerald-600" />
+              <Circle v-else class="w-5 h-5 text-zinc-300 hover:text-zinc-600" />
             </button>
 
             <div>
@@ -366,7 +369,7 @@ function confirmDeleteProperty() {
 
         <button
           @click="activeSnag = null; showSnagModal = true"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200/90 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
         >
           <Plus class="w-3.5 h-3.5" />
           <span>Log Snag</span>
@@ -384,7 +387,7 @@ function confirmDeleteProperty() {
         />
       </div>
 
-      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200 text-center shadow-xs">
+      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200/80 text-center shadow-xs">
         <h4 class="text-sm font-semibold text-zinc-700">Zero Open Snags</h4>
         <p class="text-xs text-zinc-500 mt-1">This property has no open maintenance items.</p>
       </div>
@@ -400,7 +403,7 @@ function confirmDeleteProperty() {
 
         <button
           @click="activeContact = null; showContactModal = true"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200/90 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
         >
           <Plus class="w-3.5 h-3.5" />
           <span>Add Contact</span>
@@ -417,7 +420,7 @@ function confirmDeleteProperty() {
         />
       </div>
 
-      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200 text-center shadow-xs">
+      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200/80 text-center shadow-xs">
         <h4 class="text-sm font-semibold text-zinc-700">No Contacts Assigned</h4>
         <p class="text-xs text-zinc-500 mt-1">Add plumbers, electricians, or tenants.</p>
       </div>
@@ -433,7 +436,7 @@ function confirmDeleteProperty() {
 
         <button
           @click="activeNote = null; showNoteModal = true"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200/90 text-zinc-800 text-xs font-medium transition-all active:scale-98 shadow-xs"
         >
           <Plus class="w-3.5 h-3.5" />
           <span>New Note</span>
@@ -444,11 +447,11 @@ function confirmDeleteProperty() {
         <div
           v-for="note in propertyNotes"
           :key="note.id"
-          class="p-5 rounded-xl bg-white border border-zinc-200 space-y-2 shadow-xs"
+          class="p-5 rounded-xl bg-white border border-zinc-200/80 space-y-2 shadow-xs"
         >
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-medium px-2 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-200">
+              <span class="text-xs font-medium px-2 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-200/80">
                 {{ note.category }}
               </span>
               <span class="text-xs text-zinc-500">
@@ -479,7 +482,7 @@ function confirmDeleteProperty() {
         </div>
       </div>
 
-      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200 text-center shadow-xs">
+      <div v-else class="p-8 rounded-2xl bg-white border border-zinc-200/80 text-center shadow-xs">
         <h4 class="text-sm font-semibold text-zinc-700">No Notes Logged</h4>
         <p class="text-xs text-zinc-500 mt-1">Record inspection logs, meter disputes, or key handover notes.</p>
       </div>
@@ -506,7 +509,7 @@ function confirmDeleteProperty() {
     <p class="text-xs text-zinc-500 mt-1">The requested property may have been removed.</p>
     <button
       @click="router.push('/')"
-      class="mt-4 px-4 py-2 rounded-lg bg-zinc-950 text-white font-semibold text-xs"
+      class="mt-4 px-4 py-2 rounded-lg bg-zinc-900 text-white font-semibold text-xs shadow-xs"
     >
       Return to Dashboard
     </button>

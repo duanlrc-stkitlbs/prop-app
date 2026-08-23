@@ -83,7 +83,7 @@ function handleD1Sync() {
     </div>
 
     <!-- CARD 1: Backup & Export / Import -->
-    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 space-y-6 shadow-xs">
+    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 space-y-6 shadow-xs">
       <div>
         <h2 class="text-base font-semibold text-zinc-950">Backup & Portability</h2>
         <p class="text-xs text-zinc-500 mt-0.5">Export a snapshot of all properties, expenses, snags, and vault codes</p>
@@ -91,7 +91,7 @@ function handleD1Sync() {
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- Download Backup -->
-        <div class="p-5 rounded-xl bg-zinc-50 border border-zinc-200 flex flex-col justify-between space-y-4">
+        <div class="p-5 rounded-xl bg-zinc-50/80 border border-zinc-200/80 flex flex-col justify-between space-y-4">
           <div>
             <div class="flex items-center gap-2 text-zinc-900 font-medium text-xs sm:text-sm">
               <Download class="w-4 h-4 text-zinc-700" />
@@ -104,7 +104,7 @@ function handleD1Sync() {
 
           <button
             @click="handleDownloadBackup"
-            class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm active:scale-98 transition-all"
+            class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm active:scale-98 transition-all"
           >
             <Download class="w-3.5 h-3.5" />
             <span>Download JSON</span>
@@ -112,7 +112,7 @@ function handleD1Sync() {
         </div>
 
         <!-- Import Backup -->
-        <div class="p-5 rounded-xl bg-zinc-50 border border-zinc-200 flex flex-col justify-between space-y-4">
+        <div class="p-5 rounded-xl bg-zinc-50/80 border border-zinc-200/80 flex flex-col justify-between space-y-4">
           <div>
             <div class="flex items-center gap-2 text-zinc-900 font-medium text-xs sm:text-sm">
               <Upload class="w-4 h-4 text-zinc-700" />
@@ -144,7 +144,7 @@ function handleD1Sync() {
 
           <button
             @click="triggerFileInput"
-            class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-white hover:bg-zinc-100 text-zinc-900 text-xs font-medium border border-zinc-300 active:scale-98 transition-all shadow-xs"
+            class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-white hover:bg-zinc-50 text-zinc-900 text-xs font-medium border border-zinc-200/90 active:scale-98 transition-all shadow-xs"
           >
             <Upload class="w-3.5 h-3.5" />
             <span>Select JSON File</span>
@@ -154,7 +154,7 @@ function handleD1Sync() {
     </div>
 
     <!-- CARD 2: Preferences & Currency -->
-    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 space-y-4 shadow-xs">
+    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 space-y-4 shadow-xs">
       <div>
         <h2 class="text-base font-semibold text-zinc-950">Currency & Formatting</h2>
         <p class="text-xs text-zinc-500 mt-0.5">Select your primary currency symbol</p>
@@ -176,7 +176,7 @@ function handleD1Sync() {
 
         <div class="space-y-1">
           <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Preview</label>
-          <div class="px-3.5 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-950 font-mono text-sm">
+          <div class="px-3.5 py-2.5 rounded-xl bg-zinc-50/80 border border-zinc-200/80 text-zinc-950 font-mono text-sm">
             {{ store.formatCurrency(4500) }} (Sample expense)
           </div>
         </div>
@@ -184,20 +184,20 @@ function handleD1Sync() {
     </div>
 
     <!-- CARD 3: Cloudflare D1 Synchronization -->
-    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 space-y-4 shadow-xs">
+    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 space-y-4 shadow-xs">
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-base font-semibold text-zinc-950">Cloudflare D1 Cloud Sync</h2>
           <p class="text-xs text-zinc-500 mt-0.5">Serverless SQLite synchronization layer</p>
         </div>
 
-        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-zinc-100 border border-zinc-200 text-xs font-mono text-zinc-700 font-medium">
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-zinc-100/80 border border-zinc-200 text-xs font-mono text-zinc-700 font-medium">
           Connected
         </div>
       </div>
 
       <div class="space-y-3 pt-2">
-        <div class="flex items-center justify-between p-4 rounded-xl bg-zinc-50 border border-zinc-200">
+        <div class="flex items-center justify-between p-4 rounded-xl bg-zinc-50/80 border border-zinc-200/80">
           <div>
             <div class="text-xs font-medium text-zinc-900">Enable Cloud D1 Synchronization</div>
             <div class="text-[11px] text-zinc-500">Synchronize data changes with remote SQLite table</div>
@@ -209,7 +209,7 @@ function handleD1Sync() {
               @change="store.updateSettings({ enableD1Sync: store.settings.enableD1Sync })"
               class="sr-only peer"
             />
-            <div class="w-10 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-950"></div>
+            <div class="w-10 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-900"></div>
           </label>
         </div>
 
@@ -220,7 +220,7 @@ function handleD1Sync() {
           <button
             @click="handleD1Sync"
             :disabled="store.isSyncing"
-            class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white hover:bg-zinc-100 text-zinc-900 text-xs font-medium border border-zinc-300 active:scale-98 transition-all shadow-xs"
+            class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white hover:bg-zinc-50 text-zinc-900 text-xs font-medium border border-zinc-200/90 active:scale-98 transition-all shadow-xs"
           >
             <RefreshCw class="w-3.5 h-3.5 text-zinc-700" :class="{ 'animate-spin': store.isSyncing }" />
             <span>{{ store.isSyncing ? 'Syncing...' : 'Sync Now' }}</span>
@@ -230,7 +230,7 @@ function handleD1Sync() {
     </div>
 
     <!-- CARD 4: Database Reset -->
-    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 space-y-4 shadow-xs">
+    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 space-y-4 shadow-xs">
       <div>
         <h2 class="text-base font-semibold text-zinc-950">Seed Database Reset</h2>
         <p class="text-xs text-zinc-500 mt-0.5">Reset demo properties, municipal rates, snags & contacts</p>
@@ -243,7 +243,7 @@ function handleD1Sync() {
 
         <button
           @click="confirmResetSeedData"
-          class="flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-600 hover:text-zinc-950 text-xs font-medium active:scale-98 transition-all shrink-0 shadow-xs"
+          class="flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200/90 text-zinc-700 hover:text-zinc-950 text-xs font-medium active:scale-98 transition-all shrink-0 shadow-xs"
         >
           <RefreshCw class="w-3.5 h-3.5" />
           <span>Reset to Seed Data</span>

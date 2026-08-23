@@ -96,7 +96,7 @@ const filteredContacts = computed(() => {
 
       <button
         @click="openNewContactModal"
-        class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm transition-all active:scale-98 shrink-0 self-start sm:self-center"
+        class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold shadow-sm transition-all active:scale-98 shrink-0 self-start sm:self-center"
       >
         <Plus class="w-3.5 h-3.5" />
         <span>Add Contact</span>
@@ -122,11 +122,11 @@ const filteredContacts = computed(() => {
           v-for="role in roles"
           :key="role"
           @click="selectedRole = role"
-          class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border"
+          class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border shadow-xs"
           :class="[
             selectedRole === role
-              ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs font-semibold'
-              : 'bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-100 hover:text-zinc-950'
+              ? (role === 'Emergency' ? 'bg-amber-50 text-amber-900 border-amber-300 font-semibold' : 'bg-zinc-900 text-white border-zinc-900 font-semibold')
+              : 'bg-white text-zinc-700 border-zinc-200/90 hover:bg-zinc-50 hover:text-zinc-950'
           ]"
         >
           <span>{{ role }}</span>
@@ -147,7 +147,7 @@ const filteredContacts = computed(() => {
 
     <div
       v-else
-      class="p-12 rounded-2xl bg-white border border-zinc-200 text-center max-w-md mx-auto shadow-xs"
+      class="p-12 rounded-2xl bg-white border border-zinc-200/80 text-center max-w-md mx-auto shadow-xs"
     >
       <h3 class="text-sm font-semibold text-zinc-800">No Contacts Found</h3>
       <p class="text-xs text-zinc-500 mt-1">Try adjusting your search query or filter.</p>

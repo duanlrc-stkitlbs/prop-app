@@ -114,10 +114,10 @@ function submit() {
     >
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs overflow-y-auto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/30 backdrop-blur-xs overflow-y-auto"
         @click.self="emit('close')"
       >
-        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="w-full max-w-lg rounded-2xl bg-white border border-zinc-200/90 shadow-2xl p-6 my-8 space-y-4 max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between">
             <div>
@@ -140,7 +140,7 @@ function submit() {
               <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Property</label>
               <select
                 v-model="form.propertyId"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               >
                 <option v-for="p in store.properties" :key="p.id" :value="p.id">
                   {{ p.name }} ({{ p.address }})
@@ -156,7 +156,7 @@ function submit() {
                 type="text"
                 required
                 placeholder="e.g. City Municipal Rates, Body Corporate Levy"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
               />
             </div>
 
@@ -166,7 +166,7 @@ function submit() {
                 <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Category</label>
                 <select
                   v-model="form.category"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 >
                   <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
                 </select>
@@ -176,7 +176,7 @@ function submit() {
                 <label class="block text-xs font-medium uppercase tracking-wider text-zinc-500">Frequency</label>
                 <select
                   v-model="form.frequency"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-900 text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 >
                   <option v-for="freq in frequencies" :key="freq" :value="freq">{{ freq }}</option>
                 </select>
@@ -196,7 +196,7 @@ function submit() {
                   min="0"
                   required
                   placeholder="0.00"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
               </div>
 
@@ -208,20 +208,20 @@ function submit() {
                   min="1"
                   max="31"
                   placeholder="1 - 31"
-                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 font-mono text-sm focus:outline-none focus:border-zinc-900 shadow-xs"
                 />
               </div>
             </div>
 
             <!-- Paid Status Toggle -->
-            <div class="flex items-center justify-between p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-zinc-50/80 border border-zinc-200/80">
               <div>
                 <div class="text-xs font-medium text-zinc-900">Paid for current cycle?</div>
                 <div class="text-[11px] text-zinc-500">Toggle if settled this cycle</div>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input v-model="form.isPaid" type="checkbox" class="sr-only peer" />
-                <div class="w-10 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-950"></div>
+                <div class="w-10 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-900"></div>
               </label>
             </div>
 
@@ -232,7 +232,7 @@ function submit() {
                 v-model="form.accountReference"
                 type="text"
                 placeholder="e.g. CCT-992014881, Levy Acc #402"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 font-mono"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 font-mono shadow-xs"
               />
             </div>
 
@@ -243,7 +243,7 @@ function submit() {
                 v-model="form.notes"
                 rows="2"
                 placeholder="e.g. Direct debit on 1st..."
-                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 resize-none"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-300 text-zinc-950 text-sm focus:outline-none focus:border-zinc-900 resize-none shadow-xs"
               ></textarea>
             </div>
 
@@ -251,7 +251,7 @@ function submit() {
             <div class="pt-2">
               <button
                 type="submit"
-                class="w-full py-3 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
+                class="w-full py-3 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-sm transition-all active:scale-98 shadow-sm"
               >
                 {{ expense ? 'Update Expense' : 'Save Expense' }}
               </button>

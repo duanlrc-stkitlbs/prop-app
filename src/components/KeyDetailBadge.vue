@@ -71,7 +71,7 @@ function getCategoryIcon(category: string) {
     </div>
 
     <!-- Value & Copy Actions -->
-    <div class="mt-4 flex items-center justify-between gap-2 bg-zinc-50 p-2.5 rounded-xl border border-zinc-200 font-mono text-xs">
+    <div class="mt-4 flex items-center justify-between gap-2 bg-zinc-50/80 p-2.5 rounded-xl border border-zinc-200/80 font-mono text-xs">
       <div class="truncate text-zinc-900 font-medium select-all">
         <span v-if="revealed">{{ item.value }}</span>
         <span v-else class="tracking-widest text-zinc-400">••••••••••••</span>
@@ -81,7 +81,7 @@ function getCategoryIcon(category: string) {
         <button
           v-if="item.isSecret"
           @click="revealed = !revealed"
-          class="p-1 rounded text-zinc-500 hover:text-zinc-950 hover:bg-zinc-200 transition-colors"
+          class="p-1 rounded text-zinc-500 hover:text-zinc-950 hover:bg-zinc-200/60 transition-colors"
           :title="revealed ? 'Hide' : 'Reveal'"
         >
           <EyeOff v-if="revealed" class="w-3.5 h-3.5" />
@@ -91,10 +91,10 @@ function getCategoryIcon(category: string) {
         <button
           @click="copyValue"
           class="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all active:scale-95"
-          :class="copied ? 'bg-zinc-950 text-white' : 'bg-white text-zinc-800 hover:bg-zinc-100 border border-zinc-300 shadow-xs'"
+          :class="copied ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 shadow-xs' : 'bg-white text-zinc-800 hover:bg-zinc-50 border border-zinc-200/90 shadow-xs'"
         >
-          <Check v-if="copied" class="w-3 h-3" />
-          <Copy v-else class="w-3 h-3" />
+          <Check v-if="copied" class="w-3 h-3 text-emerald-600" />
+          <Copy v-else class="w-3 h-3 text-zinc-500" />
           <span>{{ copied ? 'Copied' : 'Copy' }}</span>
         </button>
       </div>

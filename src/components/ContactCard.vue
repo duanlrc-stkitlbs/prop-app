@@ -34,18 +34,18 @@ const assignedProperties = computed<Property[]>(() => {
 <template>
   <div
     class="flex flex-col justify-between p-6 rounded-2xl bg-white border transition-colors duration-150 shadow-xs"
-    :class="contact.isEmergencyContact ? 'border-zinc-950 shadow-sm ring-1 ring-zinc-950/10' : 'border-zinc-200 hover:border-zinc-300'"
+    :class="contact.isEmergencyContact ? 'border-amber-200/90 bg-amber-50/10 shadow-xs ring-1 ring-amber-400/20' : 'border-zinc-200 hover:border-zinc-300'"
   >
     <div class="space-y-3">
       <!-- Top header: Role & Priority Flag -->
       <div class="flex items-center justify-between gap-2">
-        <span class="px-2.5 py-0.5 rounded text-xs font-medium bg-zinc-100 text-zinc-800 border border-zinc-200">
+        <span class="px-2.5 py-0.5 rounded text-xs font-medium bg-zinc-100 text-zinc-800 border border-zinc-200/80">
           {{ contact.role }}
         </span>
 
         <span
           v-if="contact.isEmergencyContact"
-          class="px-2 py-0.5 rounded text-[11px] font-semibold bg-zinc-950 text-white"
+          class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200"
         >
           24/7 Priority
         </span>
@@ -65,7 +65,7 @@ const assignedProperties = computed<Property[]>(() => {
           v-for="star in 5"
           :key="star"
           class="w-3.5 h-3.5"
-          :class="star <= contact.rating ? 'fill-zinc-900 text-zinc-900' : 'text-zinc-300'"
+          :class="star <= contact.rating ? 'fill-amber-400 text-amber-400' : 'text-zinc-200'"
         />
       </div>
 
@@ -92,17 +92,17 @@ const assignedProperties = computed<Property[]>(() => {
       <div class="grid grid-cols-2 gap-2">
         <a
           :href="`tel:${contact.phone}`"
-          class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-zinc-950 font-medium text-xs transition-all active:scale-98"
+          class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-900 font-medium text-xs transition-all active:scale-98 shadow-xs"
         >
-          <Phone class="w-3.5 h-3.5 text-zinc-700" />
+          <Phone class="w-3.5 h-3.5 text-zinc-600" />
           <span>Call</span>
         </a>
 
         <button
           @click="emit('open-whatsapp', contact)"
-          class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-zinc-950 font-medium text-xs transition-all active:scale-98"
+          class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-900 font-medium text-xs transition-all active:scale-98 shadow-xs"
         >
-          <MessageCircle class="w-3.5 h-3.5 text-zinc-700" />
+          <MessageCircle class="w-3.5 h-3.5 text-zinc-600" />
           <span>WhatsApp</span>
         </button>
       </div>

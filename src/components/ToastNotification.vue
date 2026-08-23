@@ -19,12 +19,12 @@ const store = usePropertyStore()
         v-if="store.toast"
         class="fixed bottom-20 sm:bottom-6 right-4 left-4 sm:left-auto sm:max-w-sm z-50 pointer-events-auto"
       >
-        <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-zinc-300 shadow-xl text-zinc-950">
-          <div class="shrink-0 text-zinc-800">
-            <CheckCircle2 v-if="store.toast.type === 'success'" class="w-4 h-4 text-zinc-950" />
-            <AlertTriangle v-else-if="store.toast.type === 'warning'" class="w-4 h-4 text-zinc-900" />
-            <AlertCircle v-else-if="store.toast.type === 'error'" class="w-4 h-4 text-zinc-900" />
-            <Info v-else class="w-4 h-4 text-zinc-700" />
+        <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-zinc-200/90 shadow-xl text-zinc-950">
+          <div class="shrink-0">
+            <CheckCircle2 v-if="store.toast.type === 'success'" class="w-4 h-4 text-emerald-600" />
+            <AlertTriangle v-else-if="store.toast.type === 'warning'" class="w-4 h-4 text-amber-500" />
+            <AlertCircle v-else-if="store.toast.type === 'error'" class="w-4 h-4 text-rose-600" />
+            <Info v-else class="w-4 h-4 text-sky-600" />
           </div>
 
           <p class="text-xs font-medium leading-tight flex-1 text-zinc-900">

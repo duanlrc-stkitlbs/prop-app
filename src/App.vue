@@ -18,7 +18,7 @@ const showNoteModal = ref(false)
 </script>
 
 <template>
-  <div class="min-h-screen bg-zinc-50/70 text-zinc-900 flex flex-col font-sans">
+  <div class="min-h-screen bg-[#fafbfc] text-zinc-900 flex flex-col font-sans">
     <!-- Navigation Bar (Desktop Header + Mobile Bottom Nav) -->
     <Navbar
       @open-expense-modal="showExpenseModal = true"
